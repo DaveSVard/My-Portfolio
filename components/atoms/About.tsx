@@ -28,7 +28,7 @@ export const About = ({ specialization, name, interest }: IAbout) => {
         })}
         className="h1 mt-4"
       >
-        Hello I'm {name}
+        Hello I&apos;m {name}
       </motion.h1>
       <motion.p
         variants={fadeIn({
