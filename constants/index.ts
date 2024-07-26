@@ -1,17 +1,3 @@
-// import css from "/assets/skills/css.png";
-// import docker from "/assets/skills/docker.png";
-// import figma from "/assets/skills/figma.png";
-// import git from "/assets/skills/git.png";
-// import html from "/assets/skills/html.png";
-// import javascript from "/assets/skills/javascript.png";
-// import mongodb from "/assets/skills/mongodb.png";
-// import nodejs from "/assets/skills/nodejs.png";
-// import reactjs from "/assets/skills/reactjs.png";
-// import redux from "/assets/skills/redux.png";
-// import tailwind from "/assets/skills/tailwind.png";
-// import typescript from "/assets/skills/typescript.png";
-// import threejs from "/assets/skills/threejs.svg";
-
 export const data = {
   navigationLinks: [
     {
@@ -78,7 +64,6 @@ export const data = {
         {
           fieldName: "Languages",
           fieldValue: "Armenian, English, Russian",
-          // fieldValue: ["Armenian", "English", "Russian"],
         },
       ],
     },
@@ -101,7 +86,7 @@ export const data = {
       technologies: [
         {
           name: "HTML 5",
-          icon: "/assets/skills/html.png",
+          icon: "/assets/skills/html.webp",
         },
         {
           name: "CSS 3",
@@ -113,35 +98,35 @@ export const data = {
         },
         {
           name: "TypeScript",
-          icon: "/assets/skills/typescript.png",
+          icon: "/assets/skills/typescript.webp",
         },
         {
           name: "React JS",
-          icon: "/assets/skills/reactjs.png",
+          icon: "/assets/skills/reactjs.webp",
         },
         {
           name: "Redux Toolkit",
-          icon: "/assets/skills/redux.png",
+          icon: "/assets/skills/redux.webp",
         },
         {
           name: "Tailwind CSS",
-          icon: "/assets/skills/tailwind.png",
+          icon: "/assets/skills/tailwind.webp",
         },
         {
           name: "Three JS",
-          icon: "/assets/skills/threejs.svg",
+          icon: "/assets/skills/threejs.webp",
         },
         {
           name: "git",
-          icon: "/assets/skills/git.png",
+          icon: "/assets/skills/git.webp",
         },
         {
           name: "figma",
-          icon: "/assets/skills/figma.png",
+          icon: "/assets/skills/figma.webp",
         },
         {
           name: "docker",
-          icon: "/assets/skills/docker.png",
+          icon: "/assets/skills/docker.webp",
         },
         {
           name: "zod",
@@ -153,15 +138,15 @@ export const data = {
         },
         {
           name: "sass",
-          icon: "/assets/skills/sass.png",
+          icon: "/assets/skills/sass.webp",
         },
         {
           name: "strapi",
-          icon: "/assets/skills/strapi.png",
+          icon: "/assets/skills/strapi.webp",
         },
         {
           name: "next",
-          icon: "/assets/skills/next.png",
+          icon: "/assets/skills/next.webp",
         },
       ],
     },
