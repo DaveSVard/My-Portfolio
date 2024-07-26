@@ -7,7 +7,7 @@ export default function Home() {
 
   return (
     <section className="h-full">
-      <div className="container mx-auto">
+      <div className="sectionContainer">
         {heroSection.about && (
           <Hero {...heroSection.about} />
         )}

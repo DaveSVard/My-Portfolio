@@ -1,25 +1,20 @@
+"use client"
+
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { Nav } from "../organisms/Nav";
-import { MobileNav } from "../organisms/MobileNav";
+import { MobileNav, Nav } from "../organisms";
+import { data } from "@/constants";
 
 export const Header = () => {
   return (
-    <header className="py-8 xl:py-12 text-white">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="py-8 xl:py-8 text-white">
+      <div className="sectionContainer flex justify-between items-center">
         {/* Logo */}
-        <Link href="/">
-          <h1 className="text-4xl font-semibold">
-            DaveSVard
-            <span className="text-accent">.</span>
-          </h1>
+        <Link href="/"> 
+          <img src={data.logo.url} alt={data.logo.name} className="w-18 h-12" />
         </Link>
         {/* Desktop navigation */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:block items-center gap-8">
           <Nav />
-          <Link href="/contact">
-            <Button>Hire me</Button>
-          </Link>
         </div>
         {/* Mobile navigation */}
         <div className="lg:hidden">

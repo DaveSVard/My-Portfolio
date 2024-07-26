@@ -10,10 +10,6 @@ const config = {
   ],
   prefix: "",
   theme: {
-    container: {
-      center: true,
-      padding: "15px",
-    },
     screens: {
       xsm: "490px",
       sm: "640px",
@@ -27,6 +23,10 @@ const config = {
       prata: "Prata",
     },
     extend: {
+      spacing: {
+        "spacing-30": "30px",
+        "spacing-60": "60px",
+      },
       colors: {
         primary: "#1c1c22",
         accent: {

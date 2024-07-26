@@ -18,3 +18,9 @@
     @apply text-xl xl:text-[24px] leading-[1.1] font-semibold;
   }
 }
+
+@layer components {
+  .sectionContainer {
+    @apply max-w-7xl mx-auto px-6 md:px-8;
+  }
+}

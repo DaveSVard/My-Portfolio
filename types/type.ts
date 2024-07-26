@@ -21,6 +21,34 @@ export interface IStats {
   infoText: string;
 }
 
+export interface IResumeAbout {
+  title: string;
+  description: string;
+  info: {
+    fieldName: string;
+    fieldValue: string;
+  }[];
+}
+
+export interface IExperience {
+  title: string;
+  description: string;
+  items: {
+    company: string;
+    position: string;
+    duration: string;
+  }[];
+}
+
+export interface ISkills {
+  title: string;
+  description: string;
+  technologies: {
+    name: string;
+    icon: string;
+  }[]
+}
+
 export interface IData {
   navigationLinks: INavigationLinks[];
   logo: {
@@ -30,5 +58,10 @@ export interface IData {
   heroSection: {
     about: IAbout;
     stats: IStats[];
+  };
+  resume: {
+    about: IResumeAbout;
+    experience: IExperience;
+    skills: ISkills;
   };
 }
