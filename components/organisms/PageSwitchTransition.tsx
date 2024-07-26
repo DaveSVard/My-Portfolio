@@ -16,7 +16,7 @@ export const PageSwitchTransition = ({ children }: { children: ReactNode }) => {
             opacity: 0,
             transition: {
               delay: 1,
-              duration: 0.4,
+              duration: 0.025,
               ease: "easeInOut",
             },
           }}

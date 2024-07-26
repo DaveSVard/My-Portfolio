@@ -1,8 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
-import { About } from "../atoms/About";
-import { Circle } from "../atoms/Circle";
 import { IAbout } from "@/types/type";
+import { About, Circle } from "../atoms";
 
 export const Hero = (about: IAbout) => {
   return (

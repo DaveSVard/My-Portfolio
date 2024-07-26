@@ -1,19 +1,13 @@
-"use client";
-
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-
-import CountUp from "react-countup";
-import clsx from "clsx";
-import { MouseEvent } from "react";
 import { fadeIn } from "@/lib/motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { MouseEvent } from "react";
 
-interface IStatsCard {
-  value: number;
-  infoText: string;
-  index: number;
+interface ICardRotateAnimationWrapper {
+    index: number;
+    children: React.ReactNode
 }
 
-export const StatsCard = ({ infoText, value, index }: IStatsCard) => {
+export const CardRotateAnimationWrapper = ({ index, children } : ICardRotateAnimationWrapper) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -67,30 +61,9 @@ export const StatsCard = ({ infoText, value, index }: IStatsCard) => {
         delay: index * 0.3 + 1,
         duration: 0.4,
       })}
-      className="bg-grayGradient backdrop-blur-md shadow-lg p-4 rounded-2xl"
+      className="w-full"
     >
-      <div
-        style={{
-          transform: "translateZ(75px)",
-          transformStyle: "preserve-3d",
-        }}
-        className="flex items-center gap-4 inset-4 p-2 bg-white/10 rounded-xl place-content-center"
-      >
-        <CountUp
-          end={value}
-          duration={5}
-          delay={2}
-          className="text-4xl xl:text-6xl font-extrabold"
-        />
-        <p
-          className={clsx(
-            "leading-snug text-white/80",
-            infoText.length < 15 ? "max-w-[100px]" : "max-w-[150px]"
-          )}
-        >
-          {infoText}
-        </p>
-      </div>
+      {children}
     </motion.div>
   );
 };

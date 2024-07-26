@@ -1,5 +1,5 @@
 import { FaFileDownload } from "react-icons/fa";
-import { Button } from "../ui/button";
+import { Button } from "./button";
 import { Social } from "./Social";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";

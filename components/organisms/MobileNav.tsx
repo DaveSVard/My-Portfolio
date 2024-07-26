@@ -4,12 +4,12 @@ import { useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import { usePathname } from "next/navigation";
 
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { v4 as uuidv4 } from "uuid";
 import { data } from "@/constants";
 
 import Link from "next/link";
 import clsx from "clsx";
+import { Sheet, SheetContent, SheetTrigger } from "../atoms";
 
 export const MobileNav = () => {
   const pathname = usePathname();
