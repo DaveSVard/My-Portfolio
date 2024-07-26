@@ -41,7 +41,6 @@ const SkillBall = ({ icon }: { icon: string }) => {
         <OrbitControls enableZoom={false} />
         <Ball imgUrl={icon} />
       </Suspense>
-
       <Preload all />
     </Canvas>
   );
