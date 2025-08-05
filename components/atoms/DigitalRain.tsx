@@ -1,22 +1,36 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useTheme } from "next-themes";
 
-const BG_COLOR = "#1c1c22";
+const DARK_BG_COLOR = "rgba(28, 28, 34, 0.15)";
+const LIGHT_BG_COLOR = "rgba(255,255,255,0.15)";
 
-const getFontSize = () => {
+const DARK_TEXT_COLOR = "#00ff99";
+const LIGHT_TEXT_COLOR = "black";
+
+const getFont = () => {
   if (typeof window !== "undefined" && window.innerWidth < 768) {
-    return 28;
+    return {
+      font: "bold 30px 'JetBrains Mono', 'Consolas', 'monospace'",
+      fontSize: 30,
+      letterSpacing: 2,
+    };
   } else {
-    return 42;
+    return {
+      font: "bold 38px 'JetBrains Mono', 'Consolas', 'monospace'",
+      fontSize: 38,
+      letterSpacing: 0,
+    };
   }
 };
 
 const DigitalRain = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dropsRef = useRef<number[]>([]);
-  const fontSizeRef = useRef<number>(getFontSize());
+  const fontPropsRef = useRef(getFont());
   const characters = "01";
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -27,7 +41,7 @@ const DigitalRain = () => {
 
     function updateDropsArray() {
       if (!canvas) return;
-      const columns = Math.floor(canvas.width / fontSizeRef.current);
+      const columns = Math.floor(canvas.width / fontPropsRef.current.fontSize);
       const oldDrops = dropsRef.current;
       const newDrops: number[] = [];
 
@@ -39,7 +53,7 @@ const DigitalRain = () => {
 
     function setCanvasSizeAndFont() {
       if (!canvas) return;
-      fontSizeRef.current = getFontSize();
+      fontPropsRef.current = getFont();
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       updateDropsArray();
@@ -50,25 +64,34 @@ const DigitalRain = () => {
     const draw = () => {
       if (!ctx || !canvas) return;
 
-      ctx.fillStyle = "rgba(28, 28, 34, 0.15)";
+      ctx.fillStyle = resolvedTheme === "dark" ? DARK_BG_COLOR : LIGHT_BG_COLOR;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#00ff99";
-      ctx.font = `${fontSizeRef.current}px "Courier New", monospace`;
-
+      ctx.fillStyle =
+        resolvedTheme === "dark" ? DARK_TEXT_COLOR : LIGHT_TEXT_COLOR;
+      ctx.font = fontPropsRef.current.font;
       const drops = dropsRef.current;
       for (let i = 0; i < drops.length; i++) {
         const text = characters.charAt(
           Math.floor(Math.random() * characters.length)
         );
-        ctx.fillText(
-          text,
-          i * fontSizeRef.current,
-          drops[i] * fontSizeRef.current
-        );
+        let x =
+          i * fontPropsRef.current.fontSize +
+          (fontPropsRef.current.letterSpacing
+            ? i * fontPropsRef.current.letterSpacing
+            : 0);
+
+        if (fontPropsRef.current.fontSize <= 24) {
+          ctx.shadowColor = resolvedTheme === "dark" ? "#00ff99" : "#000";
+          ctx.shadowBlur = 4;
+        } else {
+          ctx.shadowBlur = 0;
+        }
+
+        ctx.fillText(text, x, drops[i] * fontPropsRef.current.fontSize);
 
         if (
-          drops[i] * fontSizeRef.current > canvas.height &&
+          drops[i] * fontPropsRef.current.fontSize > canvas.height &&
           Math.random() > 0.98
         ) {
           drops[i] = 0;
@@ -76,6 +99,7 @@ const DigitalRain = () => {
 
         drops[i]++;
       }
+      ctx.shadowBlur = 0;
     };
 
     const intervalId = setInterval(draw, 33);
@@ -92,12 +116,14 @@ const DigitalRain = () => {
       clearInterval(intervalId);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [resolvedTheme]);
 
   return (
     <div
-      className="bg-primary rounded-full aspect-square"
-      style={{ background: BG_COLOR }}
+      className="rounded-full aspect-square"
+      style={{
+        background: resolvedTheme === "dark" ? DARK_BG_COLOR : LIGHT_BG_COLOR,
+      }}
     >
       <canvas
         ref={canvasRef}
