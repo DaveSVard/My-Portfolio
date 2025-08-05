@@ -4,6 +4,7 @@ import { Html, useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 
 const Loader = () => {
+  const { progress } = useProgress();
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -19,7 +20,6 @@ const Loader = () => {
     );
   }
 
-  const { progress } = useProgress();
   return (
     <Html>
       <span className="canvas-load"></span>
