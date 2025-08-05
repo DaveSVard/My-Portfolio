@@ -8,7 +8,7 @@ const Header = () => {
   const { logo, links } = header;
 
   return (
-    <header className="py-8 xl:py-8 text-white">
+    <header className="py-8 xl:py-8 dark:text-white text-black">
       <div className="sectionContainer flex justify-between items-center">
         {/* Logo */}
         <Link href="/">

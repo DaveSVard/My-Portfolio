@@ -55,7 +55,7 @@ const Stats = ({
               type: "tween",
             }}
             onMouseMove={onMouseMove}
-            className="border border-white/20 p-5 group/card rounded-md w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
+            className="border border-black/20 dark:border-white/20 p-5 group/card rounded-md w-full relative overflow-hidden bg-transparent flex items-center justify-center h-full"
           >
             <CardPattern
               mouseX={mouseX}
@@ -72,7 +72,7 @@ const Stats = ({
                 />
                 <p
                   className={clsx(
-                    "leading-snug text-white",
+                    "leading-snug dark:text-white text-black",
                     infoText.length < 15 ? "max-w-[100px]" : "max-w-[150px]"
                   )}
                 >
@@ -102,7 +102,7 @@ export function CardPattern({ mouseX, mouseY, randomString }: any) {
         className="absolute inset-0 rounded-md opacity-0 mix-blend-overlay group-hover/card:opacity-100"
         style={style}
       >
-        <p className="absolute inset-x-0 text-xs h-full break-words whitespace-pre-wrap text-white font-mono font-bold transition duration-500">
+        <p className="absolute inset-x-0 text-xs h-full break-words whitespace-pre-wrap dark:text-white text-black font-mono font-bold transition duration-500">
           {randomString}
         </p>
       </motion.div>

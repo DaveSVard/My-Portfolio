@@ -28,7 +28,7 @@ const About = ({ specialization, name, interest, words }: IAbout) => {
           delay: 1.6,
           duration: 0.4,
         })}
-        className="h1 mt-4 max-w-175"
+        className="h1 mt-4 xl:max-w-175"
       >
         Hello, I&apos;m <span className="text-accent">{name}</span>
       </motion.h1>
@@ -60,7 +60,7 @@ const About = ({ specialization, name, interest, words }: IAbout) => {
         <Button
           variant="outline"
           size="md"
-          className="uppercase flex items-center gap-2"
+          className="cursor-pointer uppercase flex items-center gap-2"
         >
           <span>Download CV</span>
           <FaFileDownload className="text-xl" />
