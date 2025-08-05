@@ -10,7 +10,7 @@ const Hero = (about: IAbout) => {
       initial="hidden"
       whileInView="show"
       viewport={{ amount: 0.25, once: true }}
-      className="flex flex-col mdl:flex-row gap-12 items-center pt-4 xl:pt-8 xl:pb-24"
+      className="flex flex-col mdl:flex-row gap-12 items-center pt-5 pb-20 xl:pt-10 xl:pb-24"
     >
       <div className="flex-1 order-2 mdl:order-1">
         <About {...about} />

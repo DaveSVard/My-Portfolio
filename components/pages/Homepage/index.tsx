@@ -1,8 +1,7 @@
 "use client";
 
-import { Stats } from "@/components/organisms";
 import { homepage } from "@/constants";
-import { Hero } from "./components";
+import { Hero, Stats } from "./components";
 
 const Homepage = () => {
   const { about, stats } = homepage;
