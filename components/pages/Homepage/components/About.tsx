@@ -1,13 +1,13 @@
 "use client";
 
 import { FaFileDownload } from "react-icons/fa";
-import { Button } from "./button";
-import { Social } from "./Social";
+import { Button } from "@/components/atoms";
+import { Social } from "@/components/atoms";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { IAbout } from "@/types/type";
 
-export const About = ({ specialization, name, interest }: IAbout) => {
+const About = ({ specialization, name, interest }: IAbout) => {
   return (
     <div className="text-center mdl:text-left">
       <motion.span
@@ -28,9 +28,9 @@ export const About = ({ specialization, name, interest }: IAbout) => {
           delay: 1.6,
           duration: 0.4,
         })}
-        className="h1 mt-4"
+        className="h1 mt-4 max-w-175"
       >
-        Hello I&apos;m {name}
+        Hello, I&apos;m <span className="text-accent">{name}</span>
       </motion.h1>
       <motion.p
         variants={fadeIn({
@@ -69,3 +69,5 @@ export const About = ({ specialization, name, interest }: IAbout) => {
     </div>
   );
 };
+
+export default About;

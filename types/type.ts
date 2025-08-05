@@ -49,6 +49,18 @@ export interface ISkills {
   }[]
 }
 
+export interface IWorks {
+  id: number;
+  num: string;
+  category: string;
+  title: string;
+  description: string;
+  stack: {name: string}[];
+  image: string;
+  live: string;
+  gitHub: string;
+}
+
 export interface IData {
   navigationLinks: INavigationLinks[];
   logo: {
@@ -64,4 +76,5 @@ export interface IData {
     experience: IExperience;
     skills: ISkills;
   };
+  works: IWorks[];
 }

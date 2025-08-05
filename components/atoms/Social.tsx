@@ -14,10 +14,8 @@ interface ISocial {
 
 export const Social = ({ containerClassName, iconClassName }: ISocial) => {
   const socials = [
-    { icon: <FaGithub />, path: "" },
-    { icon: <FaLinkedinIn />, path: "" },
-    { icon: <FaFacebook />, path: "" },
-    { icon: <FaInstagram />, path: "" },
+    { icon: <FaGithub />, path: "https://github.com/DaveSVard" },
+    { icon: <FaLinkedinIn />, path: "https://www.linkedin.com/in/david-vardanyan-738b95336/" },
   ];
 
   return (

@@ -22,7 +22,7 @@ export const Stats: React.FC<IStatsProps> = ({ stats }) => {
       initial="hidden"
       whileInView="show"
       viewport={{ amount: 0.25, once: true }}
-      className="grid xsm:grid-cols-2 mdl:grid-cols-4 gap-6 pt-10 pb-12"
+      className="grid xsm:grid-cols-2 mdl:grid-cols-3 gap-6 pt-10 pb-12"
     >
       {stats.map((elm, index) => {
         return <StatsCard {...elm} index={index} key={uuidv4()} />;

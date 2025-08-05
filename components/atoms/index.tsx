@@ -9,3 +9,4 @@ export * from "./sheet";
 export * from "./tabs";
 export * from "./textarea";
 export * from "./tooltip";
+export { default as DigitalRain } from "./DigitalRain";

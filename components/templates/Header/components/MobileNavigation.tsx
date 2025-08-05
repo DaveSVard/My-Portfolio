@@ -5,13 +5,16 @@ import { CiMenuFries } from "react-icons/ci";
 import { usePathname } from "next/navigation";
 
 import { v4 as uuidv4 } from "uuid";
-import { data } from "@/constants";
 
 import Link from "next/link";
 import clsx from "clsx";
-import { Sheet, SheetContent, SheetTrigger } from "../atoms";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/atoms";
 
-export const MobileNav = () => {
+const MobileNavigation = ({
+  links,
+}: {
+  links: { name: string; path: string }[];
+}) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -26,7 +29,7 @@ export const MobileNav = () => {
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <nav className="flex flex-col justify-center items-center gap-8 mt-32">
-          {data.navigationLinks.map((link) => {
+          {links.map((link) => {
             return (
               <Link
                 key={uuidv4()}
@@ -47,3 +50,5 @@ export const MobileNav = () => {
     </Sheet>
   );
 };
+
+export default MobileNavigation;
