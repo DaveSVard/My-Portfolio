@@ -28,7 +28,8 @@ export const homepage = {
     name: "David Vardanyan",
     specialization: "Forntend Developer",
     interest:
-      "I like to create fast, beautiful and user-friendly applications. I am passionate about learning and creating new things that will make life a little easier.",
+      "I am passionate about learning and creating new things that will make life a little easier.",
+    words: ["impactful", "innovative", "user-friendly", "scalable", "modern"],
   },
   stats: [
     { value: 2, infoText: "Years of experience" },

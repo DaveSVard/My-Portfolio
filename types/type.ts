@@ -14,6 +14,7 @@ export interface IAbout {
   name: string;
   specialization: string;
   interest: string;
+  words: string[];
 }
 
 export interface IStats {
