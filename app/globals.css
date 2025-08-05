@@ -1,26 +1,65 @@
-@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Prata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  body {
-    @apply font-primary bg-primary text-white leading-loose;
+@theme {
+  --color-primary: #1c1c22;
+  --color-accent: #00ff99;
+  --color-accent-hover: #00e187;
+
+  --font-family-primary: "JetBrains Mono", monospace;
+  --font-family-prata: Prata;
+
+  --spacing-spacing-30: 30px;
+  --spacing-spacing-60: 60px;
+
+  --background-image-gray-gradient: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0)
+  );
+
+  --breakpoint-xsm: 490px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-mdl: 968px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* @keyframes accordion-down {
+  from {
+    height: 0;
   }
-  .h1 {
-    @apply text-5xl xl:text-[80px] leading-[1.1] font-semibold;
-  }
-  .h2 {
-    @apply text-4xl xl:text-[48px] leading-[1.1] font-semibold;
-  }
-  .h3 {
-    @apply text-xl xl:text-[24px] leading-[1.1] font-semibold;
+  to {
+    height: var(--radix-accordion-content-height);
   }
 }
 
-@layer components {
-  .sectionContainer {
-    @apply max-w-7xl mx-auto px-6 md:px-8;
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
   }
+  to {
+    height: 0;
+  }
+} */
+
+html,
+body {
+  @apply dark:bg-primary bg-white text-black dark:text-white leading-loose size-full;
+}
+.h1 {
+  @apply text-5xl xl:text-[75px] leading-[1.1] font-semibold;
+}
+.h2 {
+  @apply text-4xl xl:text-[48px] leading-[1.1] font-semibold;
+}
+.h3 {
+  @apply text-xl xl:text-[24px] leading-[1.1] font-semibold;
+}
+.sectionContainer {
+  @apply max-w-7xl mx-auto px-6 md:px-8;
 }

@@ -20,7 +20,7 @@ export const PageSwitchTransition = ({ children }: { children: ReactNode }) => {
               ease: "easeInOut",
             },
           }}
-          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
+          className="h-screen w-screen fixed dark:bg-primary bg-white top-0 pointer-events-none"
         ></motion.div>
         {children}
       </div>

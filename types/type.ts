@@ -14,6 +14,7 @@ export interface IAbout {
   name: string;
   specialization: string;
   interest: string;
+  words: string[];
 }
 
 export interface IStats {
@@ -49,6 +50,18 @@ export interface ISkills {
   }[]
 }
 
+export interface IWorks {
+  id: number;
+  num: string;
+  category: string;
+  title: string;
+  description: string;
+  stack: {name: string}[];
+  image: string;
+  live: string;
+  gitHub: string;
+}
+
 export interface IData {
   navigationLinks: INavigationLinks[];
   logo: {
@@ -64,4 +77,5 @@ export interface IData {
     experience: IExperience;
     skills: ISkills;
   };
+  works: IWorks[];
 }

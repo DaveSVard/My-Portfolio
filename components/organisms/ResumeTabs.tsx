@@ -8,7 +8,6 @@ import {
 import { CardRotateAnimationWrapper } from "@/components/atoms/CardRotateAnimationWrapper";
 import { v4 as uuidv4 } from "uuid";
 import { IData } from "@/types/type";
-import SkillBall from "@/components/atoms/SkillBall";
 
 export const ResumeTabs = (resume: IData["resume"]) => {
   const { about, experience, skills } = resume;
@@ -51,7 +50,7 @@ export const ResumeTabs = (resume: IData["resume"]) => {
               {skills.technologies.map((tech) => {
                 return (
                   <div key={uuidv4()} className="w-20 h-20">
-                    <SkillBall icon={tech.icon} />
+                    {/* <SkillBall icon={tech.icon} /> */}
                   </div>
                 );
               })}

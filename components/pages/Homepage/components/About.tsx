@@ -1,13 +1,13 @@
 "use client";
 
 import { FaFileDownload } from "react-icons/fa";
-import { Button } from "./button";
-import { Social } from "./Social";
+import { Button, ContainerTextFlip } from "@/components/atoms";
+import { Social } from "@/components/atoms";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { IAbout } from "@/types/type";
 
-export const About = ({ specialization, name, interest }: IAbout) => {
+const About = ({ specialization, name, interest, words }: IAbout) => {
   return (
     <div className="text-center mdl:text-left">
       <motion.span
@@ -28,11 +28,11 @@ export const About = ({ specialization, name, interest }: IAbout) => {
           delay: 1.6,
           duration: 0.4,
         })}
-        className="h1 mt-4"
+        className="h1 mt-4 xl:max-w-175"
       >
-        Hello I&apos;m {name}
+        Hello, I&apos;m <span className="text-accent">{name}</span>
       </motion.h1>
-      <motion.p
+      <motion.div
         variants={fadeIn({
           direction: "right",
           type: "tween",
@@ -41,8 +41,13 @@ export const About = ({ specialization, name, interest }: IAbout) => {
         })}
         className="max-w-2xl mdl:max-w-lg mt-4 xl:mt-7"
       >
-        {interest}
-      </motion.p>
+        <span className="mr-1">I like to create</span>
+        <ContainerTextFlip
+          words={words}
+        />
+        <span className="ml-1">applications.</span>
+        <span className="ml-1">{interest}</span>
+      </motion.div>
       <motion.div
         variants={fadeIn({
           direction: "right",
@@ -55,7 +60,7 @@ export const About = ({ specialization, name, interest }: IAbout) => {
         <Button
           variant="outline"
           size="md"
-          className="uppercase flex items-center gap-2"
+          className="cursor-pointer uppercase flex items-center gap-2"
         >
           <span>Download CV</span>
           <FaFileDownload className="text-xl" />
@@ -69,3 +74,5 @@ export const About = ({ specialization, name, interest }: IAbout) => {
     </div>
   );
 };
+
+export default About;
