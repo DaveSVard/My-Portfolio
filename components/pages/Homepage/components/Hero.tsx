@@ -1,17 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
 import { IAbout } from "@/types/type";
-import { Circle, DigitalRain } from "@/components/atoms";
+import { Circle, DigitalRain, InViewContainer } from "@/components/atoms";
 import About from "./About";
 
 const Hero = (about: IAbout) => {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="show"
-      viewport={{ amount: 0.25, once: true }}
-      className="flex flex-col mdl:flex-row gap-12 items-center pt-5 pb-20 xl:pt-10 xl:pb-24"
-    >
+    <InViewContainer className="flex flex-col mdl:flex-row gap-12 items-center pt-5 pb-20 xl:pt-10 xl:pb-24">
       <div className="flex-1 order-2 mdl:order-1">
         <About {...about} />
       </div>
@@ -36,7 +31,7 @@ const Hero = (about: IAbout) => {
           <Circle />
         </div>
       </div>
-    </motion.div>
+    </InViewContainer>
   );
 };
 

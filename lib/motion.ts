@@ -30,3 +30,26 @@ export const fadeIn = ({ direction, type, delay, duration }: IFadeIn) => ({
     },
   },
 });
+
+export const opacityAnimation = ({
+  delay,
+  duration,
+  type,
+  ease,
+}: {
+  delay: number;
+  duration: number;
+  type: string;
+  ease: string;
+}) => ({
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      type: type,
+      delay: delay,
+      duration: duration,
+      ease: ease,
+    },
+  },
+});

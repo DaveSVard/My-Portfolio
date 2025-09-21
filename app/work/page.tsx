@@ -32,10 +32,10 @@ export default function Work() {
       className="min-h-[80vh] flex flex-col justify-center py-12 xl:px-0"
     >
       <div className="sectionContainer">
-        <div className="flex flex-col xl:flex-row xl:gap-spacing-30 ">
+        <div className="flex flex-col xl:flex-row xl:gap-7.5">
           <div className="w-full xl:w-1/2 xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
-            <div className="flex flex-col gap-spacing-30 h-1/2">
-              <div className="text-8xl leading-none font-extrabold text-transparent text-slate-100">
+            <div className="flex flex-col gap-7.5 h-1/2">
+              <div className="text-8xl leading-none font-extrabold text-slate-100">
                 {project.num}
               </div>
               <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize">
@@ -86,7 +86,7 @@ export default function Work() {
               className="xl:h-[520px] mb-12"
               onSlideChange={hanldeSlideChange}
             >
-              {worksData.map((project, index) => (
+              {worksData.map((project) => (
                 <SwiperSlide key={uuidv4()} className="w-full">
                     <div className="h-[460px] relative  group flex justify-center items-center bg-pink-50/20">
                         <div className="relative w-full h-full">

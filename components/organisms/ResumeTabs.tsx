@@ -72,7 +72,7 @@ export const ResumeTabs = (resume: IData["resume"]) => {
                         className="bg-[#232329] py-6 px-10 rounded-xl flex flex-col justify-center items-center mdl:items-start gap-1"
                       >
                         <span className="text-accent">{elm.duration}</span>
-                        <h3 className="text-xl min-h-spacing-60 text-center mdl:text-left">
+                        <h3 className="text-xl min-h-15 text-center mdl:text-left">
                           {elm.position}
                         </h3>
                         <div>

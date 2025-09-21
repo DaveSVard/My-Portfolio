@@ -1,25 +1,65 @@
-import * as React from "react"
-
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { Label } from ".";
+import { forwardRef, useEffect, useState } from "react";
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  error?: string;
+}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, label, type, error, ...props }, ref) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const [hasValue, setHasValue] = useState(
+      !!props.value || !!props.defaultValue
+    );
+
+    useEffect(() => {
+      setHasValue(!!props.value);
+    }, [props.value]);
+
     return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300",
-          className
+      <div className="relative w-full">
+        {label && (
+          <Label
+            label={label}
+            isFocused={isFocused}
+            hasValue={hasValue}
+            error={error}
+          />
         )}
-        ref={ref}
-        {...props}
-      />
-    )
+        <input
+          ref={ref}
+          type={type}
+          className={cn(
+            "peer flex h-13 w-full rounded-md bg-white dark:bg-primary px-3 pt-5 pb-2 text-sm border placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none transition-all duration-200 shadow-sm",
+            !error && (isFocused || hasValue)
+              ? "border-accent"
+              : error
+              ? "border-red-500"
+              : "border-gray-200 dark:border-gray-700",
+            className
+          )}
+          onFocus={(e) => {
+            setIsFocused(true);
+            props.onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setIsFocused(false);
+            props.onBlur?.(e);
+          }}
+          onChange={(e) => {
+            setHasValue(!!e.target.value);
+            props.onChange?.(e);
+          }}
+          {...props}
+        />
+        {error && <span className="text-xs text-red-500">{error}</span>}
+      </div>
+    );
   }
-)
-Input.displayName = "Input"
+);
+Input.displayName = "Input";
 
-export { Input }
+export { Input };

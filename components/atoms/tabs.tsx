@@ -57,7 +57,7 @@ interface ITabsContentWrapper {
 
 const TabsContentWrapper = ({title, description, children}: ITabsContentWrapper) => {
   return (
-    <div className="flex flex-col gap-spacing-30 text-center mdl:text-left">
+    <div className="flex flex-col gap-7.5 text-center mdl:text-left">
       <h3 className="text-4xl font-bold">{title}</h3>
       <p className="max-w-[600px] text-white/60 mx-auto mdl:mx-0">
         {description}

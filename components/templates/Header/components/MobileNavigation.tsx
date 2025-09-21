@@ -1,16 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { CiMenuFries } from "react-icons/ci";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
+import { useState } from "react";
+import { CiMenuFries } from "react-icons/ci";
 
 import { v4 as uuidv4 } from "uuid";
 
-import Link from "next/link";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  ThemeSwitch,
+} from "@/components/atoms";
 import clsx from "clsx";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/atoms";
-import { FiSun, FiMoon } from "react-icons/fi";
+import Link from "next/link";
 
 const MobileNavigation = ({
   links,
@@ -19,11 +22,6 @@ const MobileNavigation = ({
 }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const [mounted, setMounted] = useState(false);
-  const { setTheme, resolvedTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
 
   const handleLinkClick = () => {
     setIsOpen(false);
@@ -35,30 +33,7 @@ const MobileNavigation = ({
         <CiMenuFries className="text-4xl text-accent" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
-        {mounted && (
-          <div className="flex items-center gap-4">
-            <FiSun
-              onClick={() => setTheme("light")}
-              className={clsx(
-                "cursor-pointer transition-colors",
-                resolvedTheme === "light"
-                  ? "text-yellow-500"
-                  : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-              )}
-              size={28}
-            />
-            <FiMoon
-              onClick={() => setTheme("dark")}
-              className={clsx(
-                "cursor-pointer transition-colors",
-                resolvedTheme === "dark"
-                  ? "text-blue-400"
-                  : "text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
-              )}
-              size={28}
-            />
-          </div>
-        )}
+        <ThemeSwitch />
         <nav className="flex flex-col justify-center items-center gap-8 mt-32">
           {links.map((link) => {
             return (
