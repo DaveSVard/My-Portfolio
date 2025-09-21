@@ -4,23 +4,19 @@ export const header = {
       name: "home",
       path: "/",
     },
-    {
-      name: "resume",
-      path: "/resume",
-    },
-    {
-      name: "work",
-      path: "/work",
-    },
+    // {
+    //   name: "resume",
+    //   path: "/resume",
+    // },
+    // {
+    //   name: "work",
+    //   path: "/work",
+    // },
     {
       name: "contact",
       path: "/contact",
     },
   ],
-  logo: {
-    name: "Logo",
-    url: "/assets/MyLogoV2.png",
-  },
 };
 
 export const homepage = {
@@ -36,6 +32,12 @@ export const homepage = {
     { value: 12, infoText: "Project completed" },
     { value: 13, infoText: "Technologies mastered" },
   ],
+};
+
+export const contact = {
+  title: "Let’s Create Something Together",
+  description:
+    "Got an idea, project, or just a quick “hello”? I’m always happy to connect—whether it’s for collaboration, freelance work, or simply sharing thoughts. Drop me a message, and let’s make something awesome happen!",
 };
 
 export const resume = {

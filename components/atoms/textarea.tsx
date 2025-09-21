@@ -1,24 +1,75 @@
-import * as React from "react"
-
-import { cn } from "@/lib/utils"
+import { forwardRef, useEffect, useId, useState } from "react";
+import { cn } from "@/lib/utils";
+import { Label } from ".";
 
 export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  label?: string;
+  error?: string;
+}
 
-const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, ...props }, ref) => {
+const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, label, id, value, defaultValue, onFocus, onBlur, onChange, error, ...props }, ref) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const [hasValue, setHasValue] = useState(
+      value !== undefined
+        ? !!value
+        : !!defaultValue
+    );
+    const textareaId = id || useId();
+
+    useEffect(() => {
+      if (value !== undefined) {
+        setHasValue(!!value);
+      }
+    }, [value]);
+
     return (
-      <textarea
-        className={cn(
-          "flex min-h-[80px] w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-800 dark:bg-slate-950 dark:ring-offset-slate-950 dark:placeholder:text-slate-400 dark:focus-visible:ring-slate-300",
-          className
+      <div className="relative w-full">
+        {label && (
+          <Label
+            label={label}
+            id={textareaId}
+            isFocused={isFocused}
+            hasValue={hasValue}
+            error={error}
+          />
         )}
-        ref={ref}
-        {...props}
-      />
-    )
+        <textarea
+          id={textareaId}
+          ref={ref}
+          className={cn(
+            "peer flex min-h-32 px-3 pt-6 pb-2 w-full resize-none bg-white dark:bg-primary rounded-lg border text-sm placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none transition-all duration-200 shadow-sm",
+            !error && (isFocused || hasValue)
+              ? "border-accent"
+              : error
+                ? "border-red-500"
+              : "border-gray-200 dark:border-gray-700",
+            className
+          )}
+          value={value}
+          defaultValue={defaultValue}
+          onFocus={(e) => {
+            setIsFocused(true);
+            onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setIsFocused(false);
+            onBlur?.(e);
+          }}
+          onChange={(e) => {
+            setHasValue(!!e.target.value);
+            onChange?.(e);
+          }}
+          {...props}
+        />
+        {error && (
+          <span className="text-xs text-red-500">{error}</span>
+        )}
+      </div>
+    );
   }
-)
-Textarea.displayName = "Textarea"
+);
+Textarea.displayName = "Textarea";
 
-export { Textarea }
+export { Textarea };

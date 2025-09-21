@@ -1,4 +1,3 @@
-export * from "./About";
 export * from "./Circle";
 export * from "./Social";
 export * from "./button";
@@ -9,5 +8,7 @@ export * from "./sheet";
 export * from "./tabs";
 export * from "./textarea";
 export * from "./tooltip";
+export { default as Label } from "./label";
 export { default as DigitalRain } from "./DigitalRain";
 export { default as ContainerTextFlip } from "./ContainerTextFlip";
+export { default as ThemeSwitch } from "./ThemeSwitch";

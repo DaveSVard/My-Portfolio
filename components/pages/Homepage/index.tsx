@@ -7,12 +7,10 @@ const Homepage = () => {
   const { about, stats } = homepage;
 
   return (
-    <div>
-      <div className="sectionContainer">
-        {about && <Hero {...about} />}
+    <div className="sectionContainer">
+      {about && <Hero {...about} />}
 
-        {stats && <Stats stats={stats} />}
-      </div>
+      {stats && <Stats stats={stats} />}
     </div>
   );
 };

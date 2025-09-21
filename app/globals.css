@@ -12,9 +12,6 @@
   --font-family-primary: "JetBrains Mono", monospace;
   --font-family-prata: Prata;
 
-  --spacing-spacing-30: 30px;
-  --spacing-spacing-60: 60px;
-
   --background-image-gray-gradient: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.1),
@@ -29,37 +26,47 @@
   --breakpoint-xl: 1280px;
 }
 
-/* @keyframes accordion-down {
-  from {
-    height: 0;
-  }
-  to {
-    height: var(--radix-accordion-content-height);
-  }
-}
-
-@keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-  }
-  to {
-    height: 0;
-  }
-} */
-
 html,
 body {
   @apply dark:bg-primary bg-white text-black dark:text-white leading-loose size-full;
 }
+
 .h1 {
   @apply text-5xl xl:text-[75px] leading-[1.1] font-semibold;
 }
+
 .h2 {
   @apply text-4xl xl:text-[48px] leading-[1.1] font-semibold;
 }
+
 .h3 {
   @apply text-xl xl:text-[24px] leading-[1.1] font-semibold;
 }
+
 .sectionContainer {
   @apply max-w-7xl mx-auto px-6 md:px-8;
+}
+
+.cta-button {
+  @apply px-4 py-4 rounded-lg bg-accent flex justify-center items-center relative cursor-pointer overflow-hidden;
+
+  .bg-circle {
+    @apply absolute -left-10 origin-center top-1/2 -translate-y-1/2 
+      w-[120%] h-[120%] group-hover:size-10 group-hover:left-[57%]
+      group-hover:rounded-full bg-black dark:bg-white transition-all duration-500;
+  }
+
+  .text {
+    @apply uppercase md:text-lg text-white dark:text-black transition-all duration-500
+       group-hover:-translate-x-5 xl:translate-x-0 -translate-x-5;
+  }
+
+  .arrow-wrapper {
+    @apply size-10 rounded-full absolute left-[57%] top-1/2 
+      -translate-y-1/2 flex justify-center items-center overflow-hidden;
+
+    .icon {
+      @apply text-white dark:!text-black group-hover:text-accent size-4 translate-y-0 animate-bounce group-hover:translate-y-0 transition-all duration-500;
+    }
+  }
 }

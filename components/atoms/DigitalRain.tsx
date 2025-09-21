@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 
 const DARK_BG_COLOR = "rgba(28, 28, 34, 0.15)";
@@ -9,8 +9,9 @@ const LIGHT_BG_COLOR = "rgba(255,255,255,0.15)";
 const DARK_TEXT_COLOR = "#00ff99";
 const LIGHT_TEXT_COLOR = "black";
 
-const getFont = () => {
-  if (typeof window !== "undefined" && window.innerWidth < 768) {
+// Only use window in client effect, not at module scope
+const getFont = (width: number) => {
+  if (width < 768) {
     return {
       font: "bold 30px 'JetBrains Mono', 'Consolas', 'monospace'",
       fontSize: 30,
@@ -28,11 +29,27 @@ const getFont = () => {
 const DigitalRain = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dropsRef = useRef<number[]>([]);
-  const fontPropsRef = useRef(getFont());
+  const fontPropsRef = useRef(getFont(1024)); // Default to desktop for SSR
   const characters = "01";
   const { resolvedTheme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+  const [clientBg, setClientBg] = useState<string | null>(null);
+
+  // Hydration fix: Only set client background after mount
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Update clientBg on theme change after mount
+  useEffect(() => {
+    if (isMounted) {
+      setClientBg(resolvedTheme === "dark" ? DARK_BG_COLOR : LIGHT_BG_COLOR);
+    }
+  }, [resolvedTheme, isMounted]);
 
   useEffect(() => {
+    if (!isMounted) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -53,7 +70,8 @@ const DigitalRain = () => {
 
     function setCanvasSizeAndFont() {
       if (!canvas) return;
-      fontPropsRef.current = getFont();
+      // Use window.innerWidth only on client
+      fontPropsRef.current = getFont(window.innerWidth);
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       updateDropsArray();
@@ -116,13 +134,41 @@ const DigitalRain = () => {
       clearInterval(intervalId);
       window.removeEventListener("resize", handleResize);
     };
-  }, [resolvedTheme]);
+  }, [resolvedTheme, isMounted]);
 
+  // Hydration fix: Only render the client background after mount
+  // SSR: Always render a fixed background (e.g. dark), then update on client
+  // This ensures SSR and client always match for the background style
+  const initialBg = DARK_BG_COLOR; // or LIGHT_BG_COLOR if you want light as default
+
+  if (!isMounted) {
+    // SSR and first client render: always use initialBg
+    return (
+      <div
+        className="rounded-full aspect-square"
+        style={{
+          background: initialBg,
+        }}
+      >
+        <canvas
+          ref={canvasRef}
+          className="h-full w-full"
+          style={{
+            display: "block",
+            background: "transparent",
+            borderRadius: "9999px",
+          }}
+        />
+      </div>
+    );
+  }
+
+  // After mount, use the correct theme background
   return (
     <div
       className="rounded-full aspect-square"
       style={{
-        background: resolvedTheme === "dark" ? DARK_BG_COLOR : LIGHT_BG_COLOR,
+        background: clientBg ?? initialBg,
       }}
     >
       <canvas
