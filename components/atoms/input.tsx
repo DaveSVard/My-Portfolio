@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Label } from ".";
-import { forwardRef, useEffect, useId, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,12 +9,11 @@ export interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, id, type, error, ...props }, ref) => {
+  ({ className, label, type, error, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     const [hasValue, setHasValue] = useState(
       !!props.value || !!props.defaultValue
     );
-    const inputId = id || useId();
 
     useEffect(() => {
       setHasValue(!!props.value);
@@ -25,14 +24,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <Label
             label={label}
-            id={inputId}
             isFocused={isFocused}
             hasValue={hasValue}
             error={error}
           />
         )}
         <input
-          id={inputId}
           ref={ref}
           type={type}
           className={cn(

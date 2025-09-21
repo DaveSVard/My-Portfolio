@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useId, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Label } from ".";
 
@@ -9,14 +9,13 @@ export interface TextareaProps
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, id, value, defaultValue, onFocus, onBlur, onChange, error, ...props }, ref) => {
+  ({ className, label, value, defaultValue, onFocus, onBlur, onChange, error, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     const [hasValue, setHasValue] = useState(
       value !== undefined
         ? !!value
         : !!defaultValue
     );
-    const textareaId = id || useId();
 
     useEffect(() => {
       if (value !== undefined) {
@@ -29,14 +28,12 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {label && (
           <Label
             label={label}
-            id={textareaId}
             isFocused={isFocused}
             hasValue={hasValue}
             error={error}
           />
         )}
         <textarea
-          id={textareaId}
           ref={ref}
           className={cn(
             "peer flex min-h-32 px-3 pt-6 pb-2 w-full resize-none bg-white dark:bg-primary rounded-lg border text-sm placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none transition-all duration-200 shadow-sm",

@@ -3,20 +3,17 @@ import React from "react";
 
 const label = ({
   label,
-  id,
   isFocused,
   hasValue,
   error,
 }: {
   label: string;
-  id: string;
   isFocused: boolean;
   hasValue: boolean;
   error?: string;
 }) => {
   return (
     <label
-      htmlFor={id}
       className={cn(
         "absolute left-3 top-4 z-10 px-1 rounded-sm bg-white dark:bg-primary transition-all duration-200 pointer-events-none",
         !error && (isFocused || hasValue)
