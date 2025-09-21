@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { contact } from "@/constants";
-import { ContactForm, Computer } from "./components";
+import { contact } from "@/constants/index";
+import { ContactForm, Computer, MyContacts } from "./components";
 import { fadeIn, opacityAnimation } from "@/lib/motion";
 import { InViewContainer } from "@/components/atoms";
 
 const ContactPage = () => {
-  const { title, description } = contact;
+  const { title, description, socials, email, phone, languages } = contact;
 
   return (
     <InViewContainer className="sectionContainer">
@@ -51,8 +51,17 @@ const ContactPage = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-3/4 pb-10">
-          <ContactForm />
+        <div className="w-full pb-10 flex flex-col mdl:flex-row gap-5">
+          <div className="w-full mdl:w-2/3">
+            <ContactForm />
+          </div>
+
+          <MyContacts
+            phone={phone}
+            email={email}
+            socials={socials}
+            languages={languages}
+          />
         </div>
       </motion.div>
     </InViewContainer>

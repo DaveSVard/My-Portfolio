@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { z, ZodIssue } from "zod";
 import { FaPaperPlane } from "react-icons/fa";
 import { Input, Textarea } from "@/components/atoms";
+import { useMouseAnimation } from "@/lib/mouseAnimation";
+import { motion } from "framer-motion";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -22,6 +24,16 @@ const ContactForm = () => {
   const [errors, setErrors] = useState<
     Partial<Record<keyof ContactFormData, string>>
   >({});
+
+  const {
+    containerRef,
+    handleMouseMove,
+    handleMouseLeave,
+    handleMouseEnter,
+    shadowStyle,
+    shadowAnimation,
+    shadowTransition,
+  } = useMouseAnimation({ hide: true });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -69,7 +81,18 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-primary/80 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 transition-all duration-300">
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden w-full bg-white dark:bg-primary/80 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.div
+        style={shadowStyle}
+        animate={shadowAnimation}
+        transition={shadowTransition}
+      />
       <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
         <Input
           label="Enter your name"

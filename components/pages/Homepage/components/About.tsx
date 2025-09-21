@@ -2,7 +2,6 @@
 
 import { FaFileDownload } from "react-icons/fa";
 import { Button, ContainerTextFlip } from "@/components/atoms";
-import { Social } from "@/components/atoms";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { IAbout } from "@/types/type";
@@ -42,9 +41,7 @@ const About = ({ specialization, name, interest, words }: IAbout) => {
         className="max-w-2xl mdl:max-w-lg mt-4 xl:mt-7"
       >
         <span className="mr-1">I like to create</span>
-        <ContainerTextFlip
-          words={words}
-        />
+        <ContainerTextFlip words={words} />
         <span className="ml-1">applications.</span>
         <span className="ml-1">{interest}</span>
       </motion.div>
@@ -65,11 +62,6 @@ const About = ({ specialization, name, interest, words }: IAbout) => {
           <span>Download CV</span>
           <FaFileDownload className="text-xl" />
         </Button>
-
-        <Social
-          containerClassName="flex gap-3"
-          iconClassName="w-9 h-9 border border-accent rounded-full flex justify-center items-center text-accent text-base hover:bg-accent hover:text-primary hover:transition-all duration-500"
-        />
       </motion.div>
     </div>
   );

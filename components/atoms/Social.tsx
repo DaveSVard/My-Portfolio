@@ -1,22 +1,13 @@
 import Link from "next/link";
-import {
-  FaGithub,
-  FaLinkedinIn,
-  FaFacebook,
-  FaInstagram,
-} from "react-icons/fa";
 import { v4 as uuidv4 } from "uuid";
 
 interface ISocial {
   containerClassName: string;
   iconClassName: string;
+  socials: { icon: React.ReactNode; path: string }[];
 }
 
-export const Social = ({ containerClassName, iconClassName }: ISocial) => {
-  const socials = [
-    { icon: <FaGithub />, path: "https://github.com/DaveSVard" },
-    { icon: <FaLinkedinIn />, path: "https://www.linkedin.com/in/david-vardanyan-738b95336/" },
-  ];
+export const Social = ({ containerClassName, iconClassName, socials }: ISocial) => {
 
   return (
     <div className={containerClassName}>
