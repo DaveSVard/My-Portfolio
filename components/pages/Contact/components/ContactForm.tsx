@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { z, ZodIssue } from "zod";
 import { FaPaperPlane } from "react-icons/fa";
 import { Input, Textarea } from "@/components/atoms";
+import { useMouseAnimation } from "@/lib/mouseAnimation";
+import { motion } from "framer-motion";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -22,6 +24,19 @@ const ContactForm = () => {
   const [errors, setErrors] = useState<
     Partial<Record<keyof ContactFormData, string>>
   >({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitMessage, setSubmitMessage] = useState('');
+
+  const {
+    containerRef,
+    handleMouseMove,
+    handleMouseLeave,
+    handleMouseEnter,
+    shadowStyle,
+    shadowAnimation,
+    shadowTransition,
+  } = useMouseAnimation({ hide: true });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -48,7 +63,7 @@ const ContactForm = () => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = contactSchema.safeParse(form);
     if (!result.success) {
@@ -63,13 +78,50 @@ const ContactForm = () => {
       return;
     }
     setErrors({});
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+    setSubmitMessage('');
 
-    // Handle successful form submission here
-    console.log("Form submitted", form);
+    try {
+      const response = await fetch(`${window.location.origin}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setSubmitMessage('Thank you! Your message has been sent successfully.');
+        setForm({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+        setSubmitMessage(data.message || 'Failed to send message. Please try again.');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      setSubmitMessage('Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <div className="w-full bg-white dark:bg-primary/80 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4 transition-all duration-300">
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden w-full bg-white dark:bg-primary/80 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 p-4"
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <motion.div
+        style={shadowStyle}
+        animate={shadowAnimation}
+        transition={shadowTransition}
+      />
       <form className="flex flex-col gap-4" onSubmit={handleSubmit} noValidate>
         <Input
           label="Enter your name"
@@ -97,9 +149,30 @@ const ContactForm = () => {
           error={errors.message}
         />
 
-        <button className="cta-button group" type="submit">
+        {/* Status Message */}
+        {submitMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`p-3 rounded-lg text-sm font-medium ${
+              submitStatus === 'success'
+                ? 'bg-green-100 text-green-800 border border-green-200'
+                : 'bg-red-100 text-red-800 border border-red-200'
+            }`}
+          >
+            {submitMessage}
+          </motion.div>
+        )}
+
+        <button 
+          className="cta-button group" 
+          type="submit" 
+          disabled={isSubmitting}
+        >
           <div className="bg-circle" />
-          <p className="text">Submit</p>
+          <p className="text">
+            {isSubmitting ? 'Sending...' : 'Submit'}
+          </p>
           <div className="arrow-wrapper">
             <FaPaperPlane className="icon" />
           </div>

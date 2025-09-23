@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { header } from "@/constants";
+import { header } from "@/constants/index";
 import { DesktopNavigation, MobileNavigation } from "./components";
 
 const Header = () => {
