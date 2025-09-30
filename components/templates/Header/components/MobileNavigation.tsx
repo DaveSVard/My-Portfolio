@@ -17,7 +17,9 @@ import Link from "next/link";
 
 const MobileNavigation = ({
   links,
+  addOverflowHidden,
 }: {
+  addOverflowHidden: () => void;
   links: { name: string; path: string }[];
 }) => {
   const pathname = usePathname();
@@ -45,7 +47,10 @@ const MobileNavigation = ({
                   link.path == pathname &&
                     "tetx-accent border-b-2 border-accent"
                 )}
-                onClick={handleLinkClick}
+                onClick={() => {
+                  handleLinkClick();
+                  addOverflowHidden();
+                }}
               >
                 {link.name}
               </Link>
