@@ -14,8 +14,8 @@ const SkillsHero = () => {
           variants={fadeIn({
             direction: "up",
             type: "tween",
-            delay: 0.2,
-            duration: 0.6,
+            delay: 1.5,
+            duration: 0.4,
           })}
           className="mb-8"
         >
@@ -29,8 +29,8 @@ const SkillsHero = () => {
 
         <motion.div
           variants={opacityAnimation({
-            delay: 0.8,
-            duration: 0.6,
+            delay: 1.6,
+            duration: 0.4,
             type: "tween",
             ease: "easeOut",
           })}

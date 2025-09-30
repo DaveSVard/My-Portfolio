@@ -6,11 +6,7 @@ import { CanvasRevealEffect } from "@/components/atoms/CanvasRevealEffect";
 import { AnimatePresence } from "framer-motion";
 import { skills } from "@/constants";
 import { Icon } from "@radix-ui/react-select";
-
-interface TimelineEntry {
-  title: string;
-  content: React.ReactNode;
-}
+import { cn } from "@/lib/utils";
 
 const Timeline = () => {
   const {
@@ -47,7 +43,6 @@ const Timeline = () => {
   const heightTransform = useTransform(scrollYProgress, [0, 1], [0, height]);
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
-  // Helper to detect touch device
   const isTouchDevice = () =>
     typeof window !== "undefined" &&
     ("ontouchstart" in window || navigator.maxTouchPoints > 0);
@@ -55,7 +50,7 @@ const Timeline = () => {
   return (
     <div className="pb-48">
       <div className="max-w-4xl mx-auto px-6 md:px-8 w-full" ref={containerRef}>
-        <div ref={ref} className="relative pb-20">
+        <div ref={ref} className="relative md:pb-20">
           {technolgies.map((skill, index) => {
             return (
               <div
@@ -73,18 +68,12 @@ const Timeline = () => {
                       const tooltipId = `${skill.id}-${logo.id}`;
                       const isTooltipActive = activeTooltip === tooltipId;
 
-                      const handleTooltipToggle = () => {
-                        setActiveTooltip(isTooltipActive ? null : tooltipId);
-                      };
-
                       const handleMouseEnter = () =>
                         setActiveTooltip(tooltipId);
                       const handleMouseLeave = () => setActiveTooltip(null);
 
-                      // For touch, show tooltip on touchstart, hide after 2s, but do not call preventDefault on touchend
                       const handleTouchStart = () => {
                         setActiveTooltip(tooltipId);
-                        // Hide after 2s
                         setTimeout(() => setActiveTooltip(null), 2000);
                       };
 
@@ -95,10 +84,16 @@ const Timeline = () => {
                         >
                           {type === "icon" && Icon && (
                             <div
-                              className="group p-2 sm:p-3 rounded-full bg-accent/20 backdrop-blur-lg border border-accent/50"
-                              onMouseEnter={!isTouchDevice() ? handleMouseEnter : undefined}
-                              onMouseLeave={!isTouchDevice() ? handleMouseLeave : undefined}
-                              onTouchStart={isTouchDevice() ? handleTouchStart : undefined}
+                              className="group p-2 sm:p-3 rounded-full bg-accent/10 dark:bg-accent/20 backdrop-blur-lg border border-accent/50"
+                              onMouseEnter={
+                                !isTouchDevice() ? handleMouseEnter : undefined
+                              }
+                              onMouseLeave={
+                                !isTouchDevice() ? handleMouseLeave : undefined
+                              }
+                              onTouchStart={
+                                isTouchDevice() ? handleTouchStart : undefined
+                              }
                             >
                               {Icon}
 
@@ -118,7 +113,7 @@ const Timeline = () => {
                           {type === "text" && title && (
                             <div
                               key={index}
-                              className="group sm:min-w-14.5 sm:min-h-14.5 min-w-10.5 min-h-10.5 flex items-center justify-center rounded-full bg-accent/20 backdrop-blur-lg border border-accent/50"
+                              className="group sm:min-w-14.5 sm:min-h-14.5 min-w-10.5 min-h-10.5 flex items-center justify-center rounded-full bg-accent/10 dark:bg-accent/20 backdrop-blur-lg border border-accent/50"
                             >
                               <p className="text-sm md:text-base text-gray-500 dark:text-gray-400 group-hover:text-black  dark:group-hover:text-white transition-all duration-200">
                                 {title}
@@ -178,10 +173,14 @@ const Card = ({
   children?: React.ReactNode;
 }) => {
   const [hovered, setHovered] = useState(false);
+  const [touched, setTouched] = useState(false);
+
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onTouchStart={() => setTouched(true)}
+      onTouchEnd={() => setTouched(false)}
       className="border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2] w-full p-3 md:p-4 relative h-[15rem]"
     >
       <Icon className="absolute -top-3 left-0 dark:text-white text-black" />
@@ -202,7 +201,14 @@ const Card = ({
       </AnimatePresence>
 
       <div className="relative z-20">
-        <h2 className="text-black dark:text-white text-center text-sm sm:text-base md:text-lg relative z-10 group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200">
+        <h2
+          className={cn(
+            "text-center text-sm sm:text-base md:text-lg relative z-10 group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200",
+            touched || hovered
+              ? "text-white dark:text-white"
+              : "text-black dark:text-white"
+          )}
+        >
           {title}
         </h2>
       </div>

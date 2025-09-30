@@ -13,8 +13,8 @@ const SkillsPage = () => {
       <InViewContainer viewport={{ amount: 0, once: true }}>
         <motion.div
           variants={opacityAnimation({
-            delay: 0.9,
-            duration: 0.6,
+            delay: 1.7,
+            duration: 0.4,
             type: "tween",
             ease: "easeOut",
           })}
