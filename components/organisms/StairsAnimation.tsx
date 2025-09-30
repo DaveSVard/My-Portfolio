@@ -22,6 +22,9 @@ export const StairsAnimation = () => {
               ease: "easeInOut",
               delay: reverseIndex(index) * 0.1,
             }}
+            onAnimationComplete={() => {
+              document.body.style.overflow = "auto";
+            }}
             className="h-full w-full bg-emerald-400 relative"
           />
         );

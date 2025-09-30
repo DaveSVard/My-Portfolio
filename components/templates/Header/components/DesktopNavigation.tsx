@@ -9,7 +9,9 @@ import Link from "next/link";
 
 const DesktopNavigation = ({
   links,
+  addOverflowHidden,
 }: {
+  addOverflowHidden: () => void;
   links: { name: string; path: string }[];
 }) => {
   const pathname = usePathname();
@@ -27,6 +29,7 @@ const DesktopNavigation = ({
               "capitalize font-medium hover:text-accent-hover transition-all",
               link.path === pathname && "text-accent border-b-2 border-accent"
             )}
+            onClick={addOverflowHidden}
           >
             {link.name}
           </Link>
