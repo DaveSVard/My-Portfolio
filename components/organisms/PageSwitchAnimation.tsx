@@ -9,7 +9,7 @@ export const PageSwitchAnimation = () => {
   return (
     <AnimatePresence mode="wait">
       <div className="overflow-hidden" key={pathname}>
-        <div className="h-screen w-screen overflow-hidden fixed top-0 left-0 right-0 pointer-events-none z-40 flex">
+        <div className="h-screen w-screen overflow-hidden fixed top-0 left-0 right-0 pointer-events-none z-500 flex">
           <StairsAnimation />
         </div>
 
