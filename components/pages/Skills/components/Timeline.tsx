@@ -98,11 +98,12 @@ const Timeline = () => {
                               {Icon}
 
                               <div
-                                className={`${
+                                className={cn(
+                                  "w-max absolute -top-11 md:-top-9 left-1/2 -translate-x-1/2 py-1 px-2.5 rounded-xl bg-primary dark:bg-white z-50",
                                   isTooltipActive
                                     ? "block"
                                     : "hidden group-hover:block"
-                                } w-max absolute -top-8 left-1/2 -translate-x-1/2 py-1 px-2.5 rounded-xl bg-primary dark:bg-white z-50`}
+                                )}
                               >
                                 <span className="font-family-primary text-white dark:text-black text-xs leading-3.5">
                                   {title}
@@ -126,18 +127,13 @@ const Timeline = () => {
                   </div>
                 </div>
 
-                <div className="relative w-full border border-black/20 dark:border-white/20 p-2 md:p-6">
+                <div className="relative w-full border border-black/20 dark:border-white/20 p-2 md:p-3.5">
                   <Card title={skill.info}>
                     <CanvasRevealEffect
                       animationSpeed={5.1}
                       containerClassName="bg-emerald-900"
                     />
                   </Card>
-
-                  <Icon className="absolute -top-3 left-0 dark:text-white text-black" />
-                  <Icon className="absolute -bottom-3 left-0 rotate-180 dark:text-white text-black" />
-                  <Icon className="absolute -top-3 right-0 dark:text-white text-black" />
-                  <Icon className="absolute -bottom-3 right-0 rotate-180 dark:text-white text-black" />
                 </div>
               </div>
             );
@@ -173,21 +169,13 @@ const Card = ({
   children?: React.ReactNode;
 }) => {
   const [hovered, setHovered] = useState(false);
-  const [touched, setTouched] = useState(false);
 
   return (
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      onTouchStart={() => setTouched(true)}
-      onTouchEnd={() => setTouched(false)}
       className="border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2] w-full p-3 md:p-4 relative h-[15rem]"
     >
-      <Icon className="absolute -top-3 left-0 dark:text-white text-black" />
-      <Icon className="absolute -bottom-3 left-0 rotate-180 dark:text-white text-black" />
-      <Icon className="absolute -top-3 right-0 dark:text-white text-black" />
-      <Icon className="absolute -bottom-3 right-0 rotate-180 dark:text-white text-black" />
-
       <AnimatePresence>
         {hovered && (
           <motion.div
@@ -204,7 +192,7 @@ const Card = ({
         <h2
           className={cn(
             "text-center text-sm sm:text-base md:text-lg relative z-10 group-hover/canvas-card:text-white group-hover/canvas-card:-translate-y-2 transition duration-200",
-            touched || hovered
+            hovered
               ? "text-white dark:text-white"
               : "text-black dark:text-white"
           )}

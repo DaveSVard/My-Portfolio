@@ -22,7 +22,9 @@ export default function RootLayout({
         <CustomThemeProvider>
           <Header />
           <PageSwitchAnimation />
-          <PageSwitchTransition>{children}</PageSwitchTransition>
+          <div className="pt-24">
+            <PageSwitchTransition>{children}</PageSwitchTransition>
+          </div>
         </CustomThemeProvider>
       </body>
     </html>
