@@ -6,14 +6,17 @@ const label = ({
   isFocused,
   hasValue,
   error,
+  htmlFor,
 }: {
   label: string;
   isFocused: boolean;
   hasValue: boolean;
   error?: string;
+  htmlFor?: string;
 }) => {
   return (
     <label
+      htmlFor={htmlFor}
       className={cn(
         "absolute left-3 top-4 z-10 px-1 rounded-sm bg-white dark:bg-primary transition-all duration-200 pointer-events-none",
         !error && (isFocused || hasValue)

@@ -25,9 +25,9 @@ export default function RootLayout({
         <CustomThemeProvider>
           <Header />
           <PageSwitchAnimation />
-          <div className="pt-24">
+          <main className="pt-24">
             <PageSwitchTransition>{children}</PageSwitchTransition>
-          </div>
+          </main>
         </CustomThemeProvider>
       </body>
     </html>

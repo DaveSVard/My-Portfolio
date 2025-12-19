@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { Label } from ".";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useEffect, useState, useId } from "react";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -9,11 +9,13 @@ export interface InputProps
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, type, error, ...props }, ref) => {
+  ({ className, label, type, error, id, ...props }, ref) => {
     const [isFocused, setIsFocused] = useState(false);
     const [hasValue, setHasValue] = useState(
       !!props.value || !!props.defaultValue
     );
+    const generatedId = useId();
+    const inputId = id || generatedId;
 
     useEffect(() => {
       setHasValue(!!props.value);
@@ -27,10 +29,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             isFocused={isFocused}
             hasValue={hasValue}
             error={error}
+            htmlFor={inputId}
           />
         )}
         <input
           ref={ref}
+          id={inputId}
           type={type}
           className={cn(
             "peer flex h-13 w-full rounded-md bg-white dark:bg-primary px-3 pt-5 pb-2 text-sm border placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:outline-none transition-all duration-200 shadow-sm",
