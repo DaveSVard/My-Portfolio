@@ -14,6 +14,8 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  // Turbopack config (empty to silence error - webpack config is for dev with --webpack flag)
+  turbopack: {},
   // Webpack optimizations
   webpack: (config, { isServer }) => {
     if (!isServer) {
