@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from "uuid";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetTitle,
   SheetTrigger,
   ThemeSwitch,
 } from "@/components/atoms";
@@ -31,10 +33,14 @@ const MobileNavigation = ({
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger className="flex justify-center items-center">
+      <SheetTrigger className="flex justify-center items-center" aria-label="Menu">
         <CiMenuFries className="text-4xl text-accent" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
+        <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+        <SheetDescription className="sr-only">
+          Main navigation menu with links to different pages of the website
+        </SheetDescription>
         <ThemeSwitch />
         <nav className="flex flex-col justify-center items-center gap-8 mt-32">
           {links.map((link) => {
