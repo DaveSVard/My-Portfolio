@@ -6,6 +6,9 @@ import { PageSwitchAnimation } from "@/components/organisms/PageSwitchAnimation"
 import Header from "@/components/templates/Header";
 import { CustomThemeProvider } from "@/components/providers";
 
+import "@fontsource/jetbrains-mono";
+import "@fontsource/prata";
+
 export const metadata: Metadata = {
   title: "My Portfolio",
   description: ":)",

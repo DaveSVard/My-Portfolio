@@ -1,10 +1,20 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { contact } from "@/constants/index";
-import { ContactForm, Computer, MyContacts } from "./components";
+import { ContactForm, MyContacts } from "./components";
 import { fadeIn, opacityAnimation } from "@/lib/motion";
 import { InViewContainer } from "@/components/atoms";
+
+const Computer = dynamic(() => import("./components").then(mod => ({ default: mod.Computer })), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full min-h-[400px] flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-md">
+      <div className="text-gray-500 dark:text-gray-400">Loading 3D model...</div>
+    </div>
+  ),
+});
 
 const ContactPage = () => {
   const { title, description, socials, email, phone, languages } = contact;
