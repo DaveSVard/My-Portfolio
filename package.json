@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "develop": "next dev",
     "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
@@ -12,10 +13,7 @@
     "@fontsource/jetbrains-mono": "^4.5.10",
     "@fontsource/prata": "^5.2.7",
     "@radix-ui/react-dialog": "^1.1.1",
-    "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@radix-ui/react-tabs": "^1.1.0",
-    "@radix-ui/react-tooltip": "^1.1.2",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
     "@tailwindcss/postcss": "^4.1.11",

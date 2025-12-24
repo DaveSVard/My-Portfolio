@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { contact } from "@/constants/index";
+import { contact } from "@/constants";
 import { ContactForm, MyContacts } from "./components";
 import { fadeIn, opacityAnimation } from "@/lib/motion";
 import { InViewContainer } from "@/components/atoms";
