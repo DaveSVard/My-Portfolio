@@ -4,12 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { InViewContainer, Button } from "@/components/atoms";
+import { Button, InViewContainer } from "@/components/atoms";
 import { opacityAnimation } from "@/lib/motion";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaGamepad, FaInfoCircle, FaTrophy, FaKeyboard } from "react-icons/fa";
 import Additionalnfo, { InfoType } from "./components/Additionalnfo";
+import { cn } from "@/lib/utils";
+import { ClassicTetris } from "./components";
 
 const TetrisPage = () => {
+  const [startGame, setStartGame] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedInfoType, setSelectedInfoType] = useState<InfoType>("Controls");
 
@@ -18,15 +21,15 @@ const TetrisPage = () => {
     setIsModalOpen(true);
   };
 
-  const infoButtons: { label: string; type: InfoType }[] = [
-    { label: "Controls", type: "Controls" },
-    { label: "Gameplay", type: "Gameplay" },
-    { label: "Score", type: "Score" },
-    { label: "About", type: "About" },
+  const infoButtons: { label: string; type: InfoType; icon: React.ReactNode }[] = [
+    { label: "Controls", type: "Controls", icon: <FaKeyboard /> },
+    { label: "Gameplay", type: "Gameplay", icon: <FaGamepad /> },
+    { label: "Score", type: "Score", icon: <FaTrophy /> },
+    { label: "About", type: "About", icon: <FaInfoCircle /> },
   ];
 
   return (
-    <div className="sectionContainer py-20">
+    <div className="sectionContainer py-14 relative">
       <InViewContainer className="flex flex-col gap-y-10">
         <motion.div
           variants={opacityAnimation({
@@ -42,7 +45,7 @@ const TetrisPage = () => {
           </Link>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8">
+        <div className="flex flex-col items-center justify-center gap-8 min-h-100">
           <motion.div
             variants={opacityAnimation({
               delay: 1.5,
@@ -50,41 +53,63 @@ const TetrisPage = () => {
               type: "tween",
               ease: "easeOut",
             })}
-            className="max-w-2xl mx-auto"
+            className="w-full "
           >
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 text-center">
-              <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Tetris game will be implemented here
-              </p>
-              <div className="aspect-square max-w-md mx-auto bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-                <span className="text-gray-400 dark:text-gray-500">
-                  Game Canvas
-                </span>
+            {startGame ? (
+              <ClassicTetris />
+            ) : (
+              <div className="flex items-center justify-center">
+                <Button onClick={() => setStartGame(true)}>Start Game</Button>
               </div>
-            </div>
+            )}
           </motion.div>
-        </div>
 
-        <motion.div
+          <motion.div
             variants={opacityAnimation({
-              delay: 1.5,
+              delay: 1.7,
               duration: 0.4,
               type: "tween",
               ease: "easeOut",
             })}
-            className="flex flex-wrap gap-4 justify-center"
+            className="flex items-center justify-center"
           >
-            {infoButtons.map((button) => (
-              <Button
-                key={button.type}
-                onClick={() => handleOpenModal(button.type)}
-                variant="outline"
-                className="min-w-[120px]"
-              >
-                {button.label}
-              </Button>
-            ))}
+            <div className="flex flex-row flex-wrap gap-2 bg-gray-900/50 dark:bg-gray-900/80 backdrop-blur-xl rounded-xl p-2 border border-gray-700/50 shadow-2xl">
+              {infoButtons.map((button) => (
+                <motion.button
+                  key={button.type}
+                  onClick={() => handleOpenModal(button.type)}
+                  whileHover={{ scale: 1.01, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    ease: "easeOut",
+                  }}
+                  className={cn(
+                    "cursor-pointer group relative flex items-center justify-center px-3 py-2.5 rounded-xl",
+                    "bg-white/5 dark:bg-gray-800/50 text-gray-400",
+                    "hover:bg-white/10 hover:text-accent hover:shadow-lg shadow-accent/20",
+                    "transition-all duration-300 ease-out"
+                  )}
+                  title={button.label}
+                >
+                  <motion.div
+                    className="text-xl"
+                    whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {button.icon}
+                  </motion.div>
+                  <div className="overflow-hidden inline-block max-w-0 opacity-0 group-hover:ml-1.5 group-hover:max-w-[120px] group-hover:opacity-100 transition-all duration-300 ease-out">
+                    <span className="text-xs font-semibold whitespace-nowrap inline-block text-gray-300 dark:text-gray-300 group-hover:text-accent transition-colors duration-300">
+                      {button.label}
+                    </span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
           </motion.div>
+        </div>
       </InViewContainer>
 
       <Additionalnfo
