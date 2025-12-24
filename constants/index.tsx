@@ -69,10 +69,12 @@ export const contact = {
     {
       icon: <FaGithub />,
       path: "https://github.com/DaveSVard",
+      name: "Visit my GitHub profile",
     },
     {
       icon: <FaLinkedinIn />,
       path: "https://www.linkedin.com/in/david-vardanyan-738b95336/",
+      name: "Visit my LinkedIn profile",
     },
   ],
   email: {

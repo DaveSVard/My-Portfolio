@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 
 export const PageSwitchTransition = ({ children }: { children: ReactNode }) => {
-  const pathnmae = usePathname();
+  const pathname = usePathname();
 
   return (
-    <AnimatePresence>
-      <div key={pathnmae}>
+    <AnimatePresence mode="wait">
+      <div key={pathname}>
         <motion.div
           initial={{ opacity: 1 }}
           animate={{
@@ -21,6 +21,10 @@ export const PageSwitchTransition = ({ children }: { children: ReactNode }) => {
             },
           }}
           className="h-screen w-screen fixed dark:bg-primary bg-white top-0 pointer-events-none"
+          style={{
+            willChange: "opacity",
+            zIndex: 9997,
+          }}
         ></motion.div>
         {children}
       </div>

@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { useScroll, useTransform, motion } from "motion/react";
-import { CanvasRevealEffect } from "@/components/atoms/CanvasRevealEffect";
 import { AnimatePresence } from "framer-motion";
 import { skills } from "@/constants";
-import { Icon } from "@radix-ui/react-select";
 import { cn } from "@/lib/utils";
+
+const CanvasRevealEffect = dynamic(() => import("@/components/atoms/CanvasRevealEffect").then(mod => ({ default: mod.CanvasRevealEffect })), {
+  ssr: false,
+});
 
 const Timeline = () => {
   const {
@@ -143,14 +146,14 @@ const Timeline = () => {
             style={{
               height: height + "px",
             }}
-            className="absolute left-2 md:left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%] [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
+            className="absolute left-2 md:left-8 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-0% via-neutral-200 dark:via-neutral-700 to-transparent to-99% mask-[linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)]"
           >
             <motion.div
               style={{
                 height: heightTransform,
                 opacity: opacityTransform,
               }}
-              className="absolute inset-x-0 top-0 w-[2px] bg-gradient-to-t from-green-300 via-accent to-transparent from-[0%] via-[10%] rounded-full"
+              className="absolute inset-x-0 top-0 w-[2px] bg-linear-to-t from-green-300 via-accent to-transparent from-0% via-10% rounded-full"
             />
           </div>
         </div>
@@ -174,7 +177,7 @@ const Card = ({
     <div
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="border border-black/[0.2] group/canvas-card flex items-center justify-center dark:border-white/[0.2] w-full p-3 md:p-4 relative h-[15rem]"
+      className="border border-black/20 group/canvas-card flex items-center justify-center dark:border-white/20 w-full p-3 md:p-4 relative h-60"
     >
       <AnimatePresence>
         {hovered && (

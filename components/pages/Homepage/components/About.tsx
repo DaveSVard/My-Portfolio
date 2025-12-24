@@ -1,10 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { FaFileDownload } from "react-icons/fa";
-import { Button, ContainerTextFlip } from "@/components/atoms";
+import { Button } from "@/components/atoms";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { IAbout } from "@/types/type";
+
+const ContainerTextFlip = dynamic(() => import("@/components/atoms").then(mod => ({ default: mod.ContainerTextFlip })), {
+  ssr: false,
+  loading: () => <span className="inline-block min-w-[100px]" />,
+});
 
 const About = ({ specialization, name, interest, words }: IAbout) => {
   return (

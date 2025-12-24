@@ -49,7 +49,7 @@ const MyContacts = ({
                 <FaPhone className="min-w-4 min-h-4 text-gray-500 dark:text-gray-400" />
                 <a
                   href={phone.href}
-                  className="text-gray-500 dark:text-gray-400 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-accent after:transition-all after:duration-300 after:ease-in-out"
+                  className="text-gray-500 dark:text-gray-400 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-px after:bg-accent after:transition-all after:duration-300 after:ease-in-out"
                 >
                   {phone.alt}
                 </a>
@@ -58,7 +58,7 @@ const MyContacts = ({
                 <FaEnvelope className="min-w-4 min-h-4 text-gray-500 dark:text-gray-400" />
                 <a
                   href={email.href}
-                  className="text-wrap text-gray-500 dark:text-gray-400 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-[1px] after:bg-accent after:transition-all after:duration-300 after:ease-in-out"
+                  className="text-wrap text-gray-500 dark:text-gray-400 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 hover:after:w-full after:h-px after:bg-accent after:transition-all after:duration-300 after:ease-in-out"
                 >
                   {email.alt}
                 </a>

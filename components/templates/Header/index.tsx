@@ -34,7 +34,8 @@ const Header = () => {
       }}
       animate={hidden ? "hidden" : "visible"}
       transition={{ duration: 0.35, ease: "easeInOut" }}
-      className="py-8 xl:py-8 dark:text-white text-black fixed w-full z-100 bg-white/70 dark:bg-primary/60 backdrop-blur-sm"
+      className="py-8 xl:py-8 dark:text-white text-black fixed w-full bg-white/70 dark:bg-primary/60 backdrop-blur-sm"
+      style={{ zIndex: 100 }}
     >
       <div className="sectionContainer flex justify-between items-center">
         {/* Logo */}
@@ -44,7 +45,7 @@ const Header = () => {
           </span>
         </Link>
         {/* Desktop navigation */}
-        <div className="hidden lg:block items-center gap-8">
+        <div className="hidden lg:block">
           <DesktopNavigation
             addOverflowHidden={addOverflowHidden}
             links={links}

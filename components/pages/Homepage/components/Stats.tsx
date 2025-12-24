@@ -1,13 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { motion, useMotionTemplate, useMotionValue } from "motion/react";
 
 import { cn } from "@/lib/utils";
 import { IStats } from "@/types/type";
 import { CardRotateAnimationWrapper } from "@/components/atoms/CardRotateAnimationWrapper";
 
-import CountUp from "react-countup";
+const CountUp = dynamic(() => import("react-countup"), {
+  ssr: false,
+  loading: () => <span className="text-4xl xl:text-6xl font-extrabold">0</span>,
+});
+
 import clsx from "clsx";
 
 const Stats = ({
@@ -93,16 +98,16 @@ export function CardPattern({ mouseX, mouseY, randomString }: any) {
 
   return (
     <div className="pointer-events-none">
-      <div className="absolute inset-0 rounded-md [mask-image:linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
+      <div className="absolute inset-0 rounded-md mask-[linear-gradient(white,transparent)] group-hover/card:opacity-50"></div>
       <motion.div
-        className="absolute inset-0 rounded-md bg-gradient-to-r from-green-400 to-accent opacity-0 group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
+        className="absolute inset-0 rounded-md bg-linear-to-r from-green-400 to-accent opacity-0 group-hover/card:opacity-100 backdrop-blur-xl transition duration-500"
         style={style}
       />
       <motion.div
         className="absolute inset-0 rounded-md opacity-0 mix-blend-overlay group-hover/card:opacity-100"
         style={style}
       >
-        <p className="absolute inset-x-0 text-xs h-full break-words whitespace-pre-wrap dark:text-white text-black font-mono font-bold transition duration-500">
+        <p className="absolute inset-x-0 text-xs h-full wrap-break-word whitespace-pre-wrap dark:text-white text-black font-mono font-bold transition duration-500">
           {randomString}
         </p>
       </motion.div>

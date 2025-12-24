@@ -1,6 +1,9 @@
-"use client";
+import dynamic from "next/dynamic";
 
-import ResumePage from "@/components/pages/Resume";
+const ResumePage = dynamic(() => import("@/components/pages/Resume"), {
+  loading: () => <div className="sectionContainer min-h-screen" />,
+  ssr: true,
+});
 
 export default function Resume() {
   return <ResumePage />;

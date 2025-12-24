@@ -1,8 +1,19 @@
 "use client";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { IAbout } from "@/types/type";
-import { Circle, DigitalRain, InViewContainer } from "@/components/atoms";
+import { InViewContainer } from "@/components/atoms";
 import About from "./About";
+
+const DigitalRain = dynamic(() => import("@/components/atoms").then(mod => ({ default: mod.DigitalRain })), {
+  ssr: false,
+  loading: () => <div className="w-[225px] h-[225px] xsm:w-[290px] xsm:h-[290px] md:w-[375px] md:h-[375px] xl:w-[425px] xl:h-[425px]" />,
+});
+
+const Circle = dynamic(() => import("@/components/atoms").then(mod => ({ default: mod.Circle })), {
+  ssr: false,
+  loading: () => <div className="w-[225px] h-[225px] xsm:w-[290px] xsm:h-[290px] md:w-[375px] md:h-[375px] xl:w-[425px] xl:h-[425px]" />,
+});
 
 const Hero = (about: IAbout) => {
   return (
