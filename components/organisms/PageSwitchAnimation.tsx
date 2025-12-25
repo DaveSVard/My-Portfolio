@@ -24,8 +24,8 @@ export const PageSwitchAnimation = () => {
           animate={{
             opacity: 0,
             transition: {
-              delay: 1,
-              duration: 0.1,
+              delay: 0,
+              duration: 0.4,
               ease: "easeInOut",
             },
           }}

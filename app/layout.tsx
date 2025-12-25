@@ -5,6 +5,7 @@ import { PageSwitchTransition } from "@/components/organisms/PageSwitchTransitio
 import { PageSwitchAnimation } from "@/components/organisms/PageSwitchAnimation";
 import Header from "@/components/templates/Header";
 import { CustomThemeProvider } from "@/components/providers";
+import { ThemeColorInjector } from "@/components/providers/ThemeColorInjector";
 
 import "@fontsource/jetbrains-mono";
 import "@fontsource/prata";
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-family-primary">
+        <ThemeColorInjector />
         <CustomThemeProvider>
           <Header />
           <PageSwitchAnimation />

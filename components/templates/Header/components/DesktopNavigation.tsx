@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 
-import { ThemeSwitch } from "@/components/atoms";
+import { ThemeSwitch, ThemeSettingsModal } from "@/components/atoms";
 import clsx from "clsx";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ const DesktopNavigation = ({
   const pathname = usePathname();
 
   return (
-    <nav className="flex gap-8">
+    <nav className="flex items-center gap-8">
       <ThemeSwitch />
 
       {links.map((link) => {
@@ -35,6 +35,8 @@ const DesktopNavigation = ({
           </Link>
         );
       })}
+
+      <ThemeSettingsModal />
     </nav>
   );
 };

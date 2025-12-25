@@ -1,10 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CiMenuFries } from "react-icons/ci";
-
-import { v4 as uuidv4 } from "uuid";
 
 import {
   Sheet,
@@ -13,6 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
   ThemeSwitch,
+  ThemeSettingsModal,
 } from "@/components/atoms";
 import clsx from "clsx";
 import Link from "next/link";
@@ -26,10 +25,28 @@ const MobileNavigation = ({
 }) => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleLinkClick = () => {
     setIsOpen(false);
   };
+
+  // Prevent hydration mismatch by not rendering Sheet during SSR
+  if (!mounted) {
+    return (
+      <button
+        type="button"
+        className="flex justify-center items-center"
+        aria-label="Menu"
+      >
+        <CiMenuFries className="text-4xl text-accent" />
+      </button>
+    );
+  }
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -41,12 +58,15 @@ const MobileNavigation = ({
         <SheetDescription className="sr-only">
           Main navigation menu with links to different pages of the website
         </SheetDescription>
-        <ThemeSwitch />
+        <div className="flex items-center gap-4">
+          <ThemeSwitch />
+          <ThemeSettingsModal />
+        </div>
         <nav className="flex flex-col justify-center items-center gap-8 mt-32">
-          {links.map((link) => {
+          {links.map((link, index) => {
             return (
               <Link
-                key={uuidv4()}
+                key={`${link.path}-${index}`}
                 href={link.path}
                 className={clsx(
                   "text-xl capitalize hover:text-accent-hover",

@@ -8,5 +8,6 @@ export { default as Label } from "./label";
 export { default as DigitalRain } from "./DigitalRain";
 export { default as ContainerTextFlip } from "./ContainerTextFlip";
 export { default as ThemeSwitch } from "./ThemeSwitch";
+export { default as ThemeSettingsModal } from "./ThemeSettingsModal";
 export { default as InViewContainer } from "./InViewContainer";
 export { default as AnimatedCard } from "./AnimatedCard";
