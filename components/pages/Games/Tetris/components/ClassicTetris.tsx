@@ -2,6 +2,10 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+import { FaPlay, FaPause } from "react-icons/fa6";
+import { VscDebugRestart } from "react-icons/vsc";
+
 import { cn } from '@/lib/utils';
 
 interface TetrisPiece {
@@ -759,7 +763,7 @@ export default function ClassicTetris() {
   };
 
   return (
-    <div className="flex items-center justify-center p-4 relative">
+    <div className="flex items-center justify-center relative">
       <AnimatePresence>
         {gameOver && (
           <motion.div
@@ -779,7 +783,7 @@ export default function ClassicTetris() {
                 stiffness: 300,
                 damping: 25
               }}
-              className="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 border-2 border-red-500/50"
+              className="bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 border-2 border-accent/50"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -788,7 +792,7 @@ export default function ClassicTetris() {
                 className="text-center mb-6"
               >
                 <motion.h2
-                  className="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-red-500 via-orange-500 to-red-500 mb-2"
+                  className="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-accent via-green-500 to-accent mb-2"
                   animate={{
                     backgroundPosition: ["0%", "100%", "0%"],
                   }}
@@ -807,7 +811,7 @@ export default function ClassicTetris() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="w-24 h-1 bg-linear-to-r from-transparent via-red-500 to-transparent mx-auto rounded-full"
+                  className="w-24 h-1 bg-linear-to-r from-transparent via-accent to-transparent mx-auto rounded-full"
                 />
               </motion.div>
 
@@ -864,46 +868,41 @@ export default function ClassicTetris() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={resetGame}
-                  className="w-full bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 text-lg"
+                  className="w-full bg-linear-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 text-lg"
                 >
                   Play Again
                 </motion.button>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  className="text-center text-gray-400 text-sm mt-2"
+                <motion.a
+                  href="/games"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={resetGame}
+                  className="text-center w-full bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-all duration-300 text-lg"
                 >
-                  Press the button or click Reset to start a new game
-                </motion.p>
+                  Main Menu
+                </motion.a>
               </motion.div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="flex justify-center gap-8 max-w-6xl mx-auto w-full">
+      <div className="ml-40 flex flex-col  items-center justify-center max-w-6xl mx-auto w-full">
+        <motion.div
+          className="w-56 mr-40 text-center text-sm text-white bg-black py-2.5 px-4 rounded-t-lg shadow-2xl"
+          animate={isClearing ? { color: ["#ffffff", "#4f46e5", "#ffffff"] } : {}}
+          transition={{ duration: 0.3, repeat: isClearing ? Infinity : 0 }}
+        >
+          <span className="text-gray-400">Score:</span> {score.toLocaleString()}
+        </motion.div>
+
+
         {/* Game Board */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex flex-col items-start"
+          className="flex flex-row items-start gap-x-1.5"
         >
-          <div className="mb-4 flex gap-2">
-            <button
-              onClick={() => setIsPaused(!isPaused)}
-              className={cn("text-sm px-3 py-2 text-white rounded-lg transition-colors", isPaused ? "bg-orange-600 hover:bg-orange-700" : "bg-green-600 hover:bg-green-700")}
-            >
-              {isPaused ? 'Resume' : 'Pause'}
-            </button>
-            <button
-              onClick={resetGame}
-              className="text-sm px-3 py-2 text-white rounded-lg transition-colors bg-red-600 hover:bg-red-700"
-            >
-              Reset
-            </button>
-          </div>
-
           <div className="bg-black p-4 rounded-lg shadow-2xl relative">
             <div className="grid grid-cols-10 gap-1">
               {(() => {
@@ -917,7 +916,7 @@ export default function ClassicTetris() {
                     return (
                       <motion.div
                         key={`${y}-${x}`}
-                        className={`w-6 h-6 border border-gray-700 ${cell || 'bg-gray-800'}`}
+                        className={`xsm:min-w-6 xsm:min-h-6 xsm:w-6 xsm:h-6 min-w-5.5 min-h-5.5 w-5.5 h-5.5 border border-gray-700 ${cell || 'bg-gray-800'}`}
                         style={{
                           position: 'relative',
                           overflow: 'hidden'
@@ -1227,54 +1226,9 @@ export default function ClassicTetris() {
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
 
-        {/* Game Info */}
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex flex-col gap-6 justify-between self-end"
-        >
-          <div className="bg-gray-900/50 dark:bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border border-gray-700/50 shadow-2xl">
-            <h2 className="text-2xl font-bold text-white mb-4">Hold block</h2>
-            <div className="flex flex-col gap-y-2 items-center justify-center bg-black p-4 rounded min-h-[80px]">
-              {heldPiece ? (
-                <div className="grid gap-0.5 w-fit" style={{ gridTemplateColumns: `repeat(${heldPiece.shape[0].length}, 1fr)` }}>
-                  {heldPiece.shape.map((row, y) =>
-                    row.map((cell, x) => (
-                      <div
-                        key={`${y}-${x}`}
-                        className={`w-4 h-4 ${cell ? heldPiece.color : 'bg-transparent'}`}
-                      />
-                    ))
-                  )}
-                </div>
-              ) : (
-                <div className="text-gray-500 text-sm">Press C to hold</div>
-              )}
-            </div>
-          </div>
-
-          <motion.div
-            className="bg-gray-900/50 dark:bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border border-gray-700/50 shadow-2xl"
-            animate={isClearing ? {
-              boxShadow: [
-                "0 0 20px rgba(79, 70, 229, 0.3)",
-                "0 0 40px rgba(79, 70, 229, 0.6)",
-                "0 0 20px rgba(79, 70, 229, 0.3)"
-              ]
-            } : {}}
-            transition={{ duration: 0.5, repeat: isClearing ? Infinity : 0 }}
-          >
-            <h2 className="text-2xl font-bold text-white mb-4">Score</h2>
-            <div className="space-y-2">
-              <motion.div
-                className="text-white"
-                animate={isClearing ? { color: ["#ffffff", "#4f46e5", "#ffffff"] } : {}}
-                transition={{ duration: 0.3, repeat: isClearing ? Infinity : 0 }}
-              >
-                <span className="text-gray-400">Score:</span> {score.toLocaleString()}
-              </motion.div>
+          <div className="min-w-40 flex flex-col items-center justify-center gap-2 mt-12">
+            <div className="w-full flex flex-col gap-1 text-sm bg-black py-3 px-3 rounded-lg shadow-2xl">
               <div className="text-white">
                 <span className="text-gray-400">Level:</span> {level}
               </div>
@@ -1286,23 +1240,58 @@ export default function ClassicTetris() {
                 <span className="text-gray-400">Lines:</span> {lines}
               </motion.div>
             </div>
-          </motion.div>
 
-          <div className="bg-gray-900/50 dark:bg-gray-900/80 backdrop-blur-xl rounded-xl p-4 border border-gray-700/50 shadow-2xl">
-            <h2 className="text-2xl font-bold text-white mb-4">Next</h2>
-            <div className="flex flex-col gap-y-2 items-center justify-center bg-black p-4 rounded min-h-[150px]">
-              {nextPiece.map((piece, idx) => (
-                <div key={idx} className="grid gap-0.5 w-fit" style={{ gridTemplateColumns: `repeat(${piece.shape[0].length}, 1fr)` }}>
-                  {piece.shape.map((row, y) =>
-                    row.map((cell, x) => (
-                      <div
-                        key={`${y}-${x}`}
-                        className={`w-4 h-4 ${cell ? piece.color : 'bg-transparent'}`}
-                      />
-                    ))
-                  )}
-                </div>
-              ))}
+            <div className="w-full bg-black py-3 px-3 rounded-lg shadow-2xl">
+              <h2 className="text-base font-bold text-white mb-4">Next </h2>
+              <div className="flex flex-col gap-y-2 items-center justify-center bg-black p-4 rounded min-h-[150px]">
+                {nextPiece.map((piece, idx) => (
+                  <div key={idx} className="grid gap-0.5 w-fit" style={{ gridTemplateColumns: `repeat(${piece.shape[0].length}, 1fr)` }}>
+                    {piece.shape.map((row, y) =>
+                      row.map((cell, x) => (
+                        <div
+                          key={`${y}-${x}`}
+                          className={`w-4 h-4 ${cell ? piece.color : 'bg-transparent'}`}
+                        />
+                      ))
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-full bg-black py-3 px-3 rounded-lg shadow-2xl">
+              <h2 className="text-base font-bold text-white mb-4">Hold block</h2>
+              <div className="flex flex-col gap-y-2 items-center justify-center bg-black p-2 rounded min-h-16">
+                {heldPiece ? (
+                  <div className="grid gap-0.5 w-fit" style={{ gridTemplateColumns: `repeat(${heldPiece.shape[0].length}, 1fr)` }}>
+                    {heldPiece.shape.map((row, y) =>
+                      row.map((cell, x) => (
+                        <div
+                          key={`${y}-${x}`}
+                          className={`w-4 h-4 ${cell ? heldPiece.color : 'bg-transparent'}`}
+                        />
+                      ))
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-gray-500 text-sm">Press C to <br /> hold the block</div>
+                )}
+              </div>
+            </div>
+
+            <div className="w-full mb-4 flex gap-2">
+              <button
+                onClick={() => setIsPaused(!isPaused)}
+                className={cn("flex items-center justify-center w-full cursor-pointer px-3 py-2 text-white rounded-lg transition-colors", isPaused ? "bg-orange-600 hover:bg-orange-700" : "bg-green-600 hover:bg-green-700")}
+              >
+                {isPaused ? <FaPlay className="text-xl" /> : <FaPause className="text-xl" />}
+              </button>
+              <button
+                onClick={resetGame}
+                className="flex items-center justify-center w-full cursor-pointer px-3 py-2 text-white rounded-lg transition-colors bg-blue-600 hover:bg-blue-700"
+              >
+                <VscDebugRestart className="text-xl" />
+              </button>
             </div>
           </div>
         </motion.div>

@@ -29,8 +29,8 @@ const TetrisPage = () => {
   ];
 
   return (
-    <div className="sectionContainer py-14 relative">
-      <InViewContainer className="flex flex-col gap-y-10">
+    <div className="max-w-7xl mx-auto px-4 md:px-8 pb-4 pt-12 relative">
+      <InViewContainer className="flex flex-col gap-y-6">
         <motion.div
           variants={opacityAnimation({
             delay: 1.5,
@@ -38,6 +38,7 @@ const TetrisPage = () => {
             type: "tween",
             ease: "easeOut",
           })}
+          className="px-2"
         >
           <Link href="/games" className="text-base flex items-center group">
             <FaArrowLeft className="mr-2 group-hover:-translate-x-1 transition-transform duration-300" />{" "}
@@ -45,7 +46,7 @@ const TetrisPage = () => {
           </Link>
         </motion.div>
 
-        <div className="flex flex-col items-center justify-center gap-8 min-h-100">
+        <div className="flex flex-col items-center justify-center gap-5 min-h-100">
           <motion.div
             variants={opacityAnimation({
               delay: 1.5,
