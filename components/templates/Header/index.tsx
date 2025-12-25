@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 
-import { header } from "@/constants/index";
+import { header } from "@/constants";
 import { DesktopNavigation, MobileNavigation } from "./components";
 
 const Header = () => {
