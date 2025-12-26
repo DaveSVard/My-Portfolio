@@ -94,18 +94,18 @@ const TetrisPage = () => {
                   )}
                   title={button.label}
                 >
-                  <motion.div
+                  <motion.span
                     className="text-xl"
                     whileHover={{ rotate: [0, -10, 10, -10, 0] }}
                     transition={{ duration: 0.5 }}
                   >
                     {button.icon}
-                  </motion.div>
-                  <div className="overflow-hidden inline-block max-w-0 opacity-0 group-hover:ml-1.5 group-hover:max-w-[120px] group-hover:opacity-100 transition-all duration-300 ease-out">
+                  </motion.span>
+                  <span className="overflow-hidden inline-block max-w-0 opacity-0 group-hover:ml-1.5 group-hover:max-w-[120px] group-hover:opacity-100 transition-all duration-300 ease-out">
                     <span className="text-xs font-semibold whitespace-nowrap inline-block text-gray-300 dark:text-gray-300 group-hover:text-accent transition-colors duration-300">
                       {button.label}
                     </span>
-                  </div>
+                  </span>
                 </motion.button>
               ))}
             </div>
