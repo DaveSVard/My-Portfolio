@@ -1,5 +1,15 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { useMotionValue, useSpring } from "framer-motion";
+import { useColorTheme } from "@/components/providers/ColorThemeProvider";
+import { COLOR_THEMES } from "@/constants/theme";
+
+// Helper function to convert hex to rgba with opacity
+const hexToRgba = (hex: string, opacity: number): string => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
 
 interface UseMouseAnimationOptions {
   accentColor?: string;
@@ -50,13 +60,17 @@ interface UseMouseAnimationReturn {
 export const useMouseAnimation = (
   options: UseMouseAnimationOptions
 ): UseMouseAnimationReturn => {
+  const { colorTheme } = useColorTheme();
+  const themeAccentColor = COLOR_THEMES[colorTheme]?.accent || COLOR_THEMES.green.accent;
+  const defaultAccentColor = hexToRgba(themeAccentColor, 0.25);
+
   const {
     stiffness = 200,
     damping = 30,
     shadowSize = 180,
     blurAmount = 32,
     offset = 60,
-    accentColor = "rgba(0, 225, 135, 0.25)",
+    accentColor = defaultAccentColor,
     hide = false, // NEW: default to false
   } = options;
 
@@ -142,13 +156,13 @@ export const useMouseAnimation = (
   );
 
   // Initialize shadow position to center on mount
-  useState(() => {
+  useEffect(() => {
     if (containerRef.current) {
       const { width, height } = containerRef.current.getBoundingClientRect();
       mouseX.set(width / 2);
       mouseY.set(height / 2);
     }
-  });
+  }, [mouseX, mouseY]);
 
   // Shadow style object
   const shadowStyle = {

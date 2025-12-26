@@ -17,13 +17,14 @@ const ThemeSettingsModal = () => {
   }, []);
 
   const themes: { name: string; value: ColorTheme; color: string }[] = [
-    { name: "Green", value: "green", color: "#00ff99" },
-    { name: "Purple", value: "purple", color: "#a855f7" },
-    { name: "Rose", value: "rose", color: "#f43f5e" },
-    { name: "Orange", value: "orange", color: "#f97316" },
-    { name: "Red", value: "red", color: "#ef4444" },
-    { name: "Blue", value: "blue", color: "#3b82f6" },
-    { name: "Yellow", value: "yellow", color: "#eab308" },
+    { name: "Ocean Mist", value: "ocean-mist", color: "#2EBFA5" },
+    { name: "Orange", value: "orange", color: "#FE5F00" },
+    { name: "Yellow", value: "yellow", color: "#FFAE03" },
+    { name: "Forest Moss", value: "forest-moss", color: "#688E26" },
+    { name: "Pacific Cyan", value: "pacific-cyan", color: "#62929E" },
+    { name: "Red Ochre", value: "red-ochre", color: "#C73E1D" },
+    { name: "Dodger Blue", value: "dodger-blue", color: "#2191FB" },
+    { name: "Cherry Rose", value: "cherry-rose", color: "#B6174B" },
   ];
 
   // Prevent hydration mismatch by not rendering Dialog during SSR
@@ -50,7 +51,7 @@ const ThemeSettingsModal = () => {
         </button>
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
-        <DialogPrimitive.Overlay className="fixed inset-0 z-50 dark:bg-black/80 bg-white/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <DialogPrimitive.Overlay className="fixed inset-0 z-5000 dark:bg-black/80 bg-white/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content className="fixed left-[50%] top-[50%] z-99999 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-gray-200 dark:border-gray-800 dark:bg-primary bg-white p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] rounded-lg">
           <DialogPrimitive.Title className="text-2xl font-semibold text-black dark:text-white">
             Theme Settings
@@ -58,7 +59,7 @@ const ThemeSettingsModal = () => {
           <DialogPrimitive.Description className="text-sm text-gray-600 dark:text-gray-400 mb-4">
             Choose your accent color theme
           </DialogPrimitive.Description>
-          
+
           <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
             {themes.map((theme) => (
               <button
@@ -67,7 +68,7 @@ const ThemeSettingsModal = () => {
                   setColorTheme(theme.value);
                 }}
                 className={cn(
-                  "flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all hover:scale-105",
+                  "cursor-pointer flex flex-col items-center gap-2 p-4 rounded-lg border-2 transition-all hover:scale-105",
                   colorTheme === theme.value
                     ? "border-accent bg-accent/10"
                     : "border-gray-200 dark:border-gray-700 hover:border-accent/50"

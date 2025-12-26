@@ -1,4 +1,3 @@
-import React from "react";
 import { Social } from "@/components/atoms";
 import { FaEnvelope, FaPhone } from "react-icons/fa";
 import { motion } from "framer-motion";

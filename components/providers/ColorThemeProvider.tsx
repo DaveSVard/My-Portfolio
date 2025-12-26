@@ -1,8 +1,9 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
+import { COLOR_THEMES, type ColorTheme } from "@/constants/theme";
 
-export type ColorTheme = "green" | "purple" | "rose" | "orange" | "red" | "blue" | "yellow";
+export type { ColorTheme };
 
 interface ColorThemeContextType {
   colorTheme: ColorTheme;
@@ -11,39 +12,8 @@ interface ColorThemeContextType {
 
 const ColorThemeContext = createContext<ColorThemeContextType | undefined>(undefined);
 
-const COLOR_THEMES: Record<ColorTheme, { accent: string; accentHover: string }> = {
-  green: {
-    accent: "#00ff99",
-    accentHover: "#00e187",
-  },
-  purple: {
-    accent: "#a855f7",
-    accentHover: "#9333ea",
-  },
-  rose: {
-    accent: "#f43f5e",
-    accentHover: "#e11d48",
-  },
-  orange: {
-    accent: "#f97316",
-    accentHover: "#ea580c",
-  },
-  red: {
-    accent: "#ef4444",
-    accentHover: "#dc2626",
-  },
-  blue: {
-    accent: "#3b82f6",
-    accentHover: "#2563eb",
-  },
-  yellow: {
-    accent: "#eab308",
-    accentHover: "#ca8a04",
-  },
-};
-
 export const ColorThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [colorTheme, setColorThemeState] = useState<ColorTheme>("green");
+  const [colorTheme, setColorThemeState] = useState<ColorTheme>("ocean-mist");
   const [mounted, setMounted] = useState(false);
 
   // Helper function to set cookie
@@ -66,7 +36,7 @@ export const ColorThemeProvider = ({ children }: { children: React.ReactNode }) 
       setCookie("colorTheme", savedTheme);
     } else {
       // Apply default theme
-      const theme = COLOR_THEMES["green"];
+      const theme = COLOR_THEMES["ocean-mist"];
       document.documentElement.style.setProperty("--accent-color", theme.accent);
       document.documentElement.style.setProperty("--accent-hover-color", theme.accentHover);
     }

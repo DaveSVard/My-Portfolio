@@ -7,7 +7,7 @@ import * as THREE from "three";
 export const CanvasRevealEffect = ({
   animationSpeed = 0.4,
   opacities = [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1],
-  colors = [[0, 255, 255]],
+  colors = [[0, 0, 0]],
   containerClassName,
   dotSize,
   showGradient = true,
@@ -23,7 +23,7 @@ export const CanvasRevealEffect = ({
     <div className={cn("h-full relative bg-white w-full", containerClassName)}>
       <div className="h-full w-full">
         <DotMatrix
-          colors={colors ?? [[0, 255, 255]]}
+          colors={colors}
           dotSize={dotSize ?? 3}
           opacities={
             opacities ?? [0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1]

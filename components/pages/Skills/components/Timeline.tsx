@@ -134,7 +134,7 @@ const Timeline = () => {
                   <Card title={skill.info}>
                     <CanvasRevealEffect
                       animationSpeed={5.1}
-                      containerClassName="bg-emerald-900"
+                      containerClassName="bg-accent/80"
                     />
                   </Card>
                 </div>
