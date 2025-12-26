@@ -6,6 +6,7 @@ import { PageSwitchAnimation } from "@/components/organisms/PageSwitchAnimation"
 import Header from "@/components/templates/Header";
 import { CustomThemeProvider } from "@/components/providers";
 import { ThemeColorInjector } from "@/components/providers/ThemeColorInjector";
+import { InteractiveCursor } from "@/components/atoms";
 
 import "@fontsource/jetbrains-mono";
 import "@fontsource/prata";
@@ -25,6 +26,7 @@ export default function RootLayout({
       <body className="font-family-primary">
         <ThemeColorInjector />
         <CustomThemeProvider>
+          <InteractiveCursor />
           <Header />
           <PageSwitchAnimation />
           <main className="pt-24">

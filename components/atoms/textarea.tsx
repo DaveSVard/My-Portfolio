@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef, useEffect, useState, useId } from "react";
 import { cn } from "@/lib/utils";
 import { Label } from ".";
