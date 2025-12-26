@@ -61,7 +61,7 @@ export const useMouseAnimation = (
   options: UseMouseAnimationOptions
 ): UseMouseAnimationReturn => {
   const { colorTheme } = useColorTheme();
-  const themeAccentColor = COLOR_THEMES[colorTheme]?.accent || COLOR_THEMES.green.accent;
+  const themeAccentColor = COLOR_THEMES[colorTheme]?.accent || COLOR_THEMES["ocean-mist"].accent;
   const defaultAccentColor = hexToRgba(themeAccentColor, 0.25);
 
   const {
