@@ -20,12 +20,14 @@ export const StairsAnimation = () => {
             transition={{
               duration: 0.3,
               ease: "easeInOut",
-              delay: reverseIndex(index) * 0.1,
+              delay: reverseIndex(index) * 0.08,
             }}
             onAnimationComplete={() => {
-              document.body.style.overflow = "auto";
+              if (index === 0) {
+                document.body.style.overflow = "auto";
+              }
             }}
-            className="h-full w-full bg-emerald-400 relative"
+            className="h-full w-full bg-accent relative"
           />
         );
       })}

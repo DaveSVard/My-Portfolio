@@ -6,7 +6,6 @@ import { useTheme } from "next-themes";
 const DARK_BG_COLOR = "rgba(28, 28, 34, 0.15)";
 const LIGHT_BG_COLOR = "rgba(255,255,255,0.15)";
 
-const DARK_TEXT_COLOR = "#00ff99";
 const LIGHT_TEXT_COLOR = "black";
 
 // Only use window in client effect, not at module scope
@@ -30,6 +29,7 @@ const DigitalRain = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dropsRef = useRef<number[]>([]);
   const fontPropsRef = useRef(getFont(1024)); // Default to desktop for SSR
+  const accentColorRef = useRef<string>("#00ff99"); // Default fallback
   const characters = "01";
   const { resolvedTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
@@ -38,6 +38,31 @@ const DigitalRain = () => {
   // Hydration fix: Only set client background after mount
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  // Get accent color from CSS variable and watch for changes
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const updateAccentColor = () => {
+        const color = getComputedStyle(document.documentElement)
+          .getPropertyValue("--accent-color")
+          .trim();
+        if (color) {
+          accentColorRef.current = color;
+        }
+      };
+      
+      updateAccentColor();
+      
+      // Watch for changes to the CSS variable
+      const observer = new MutationObserver(updateAccentColor);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ["style"],
+      });
+      
+      return () => observer.disconnect();
+    }
   }, []);
 
   // Update clientBg on theme change after mount
@@ -85,8 +110,11 @@ const DigitalRain = () => {
       ctx.fillStyle = resolvedTheme === "dark" ? DARK_BG_COLOR : LIGHT_BG_COLOR;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+      // Use accent color from ref (updated via MutationObserver)
+      const currentAccentColor = accentColorRef.current;
+
       ctx.fillStyle =
-        resolvedTheme === "dark" ? DARK_TEXT_COLOR : LIGHT_TEXT_COLOR;
+        resolvedTheme === "dark" ? currentAccentColor : LIGHT_TEXT_COLOR;
       ctx.font = fontPropsRef.current.font;
       const drops = dropsRef.current;
       for (let i = 0; i < drops.length; i++) {
@@ -100,7 +128,7 @@ const DigitalRain = () => {
             : 0);
 
         if (fontPropsRef.current.fontSize <= 24) {
-          ctx.shadowColor = resolvedTheme === "dark" ? "#00ff99" : "#000";
+          ctx.shadowColor = resolvedTheme === "dark" ? currentAccentColor : "#000";
           ctx.shadowBlur = 4;
         } else {
           ctx.shadowBlur = 0;

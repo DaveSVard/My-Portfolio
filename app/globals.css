@@ -2,10 +2,15 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  --accent-color: #00ff99;
+  --accent-hover-color: #00e187;
+}
+
 @theme {
   --color-primary: #1c1c22;
-  --color-accent: #00ff99;
-  --color-accent-hover: #00e187;
+  --color-accent: var(--accent-color);
+  --color-accent-hover: var(--accent-hover-color);
 
   --font-family-primary: "JetBrains Mono", monospace;
   --font-family-prata: Prata;
@@ -30,7 +35,8 @@ body {
 }
 
 body {
-  @apply overflow-hidden;
+  /* @apply overflow-hidden; */
+  @apply overflow-auto;
 }
 
 .h1 {
