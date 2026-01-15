@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { useColorTheme } from "@/components/providers/ColorThemeProvider";
 
 interface CursorTrail {
   x: number;
@@ -15,6 +16,7 @@ const InteractiveCursor = () => {
   const [isDesktop, setIsDesktop] = useState(false);
   const trailIdRef = useRef(0);
   const lastTrailTime = useRef(0);
+  const { mouseTailEnabled } = useColorTheme();
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -28,7 +30,7 @@ const InteractiveCursor = () => {
   }, []);
 
   useEffect(() => {
-    if (!isDesktop) return;
+    if (!isDesktop || !mouseTailEnabled) return;
 
     const updateCursor = (e: MouseEvent) => {
       const now = Date.now();
@@ -64,9 +66,9 @@ const InteractiveCursor = () => {
       window.removeEventListener("mousemove", updateCursor);
       clearInterval(trailInterval);
     };
-  }, [isDesktop]);
+  }, [isDesktop, mouseTailEnabled]);
 
-  if (!isDesktop) {
+  if (!isDesktop || !mouseTailEnabled) {
     return null;
   }
 
