@@ -1,11 +1,12 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { FaFileDownload } from "react-icons/fa";
+import { FaFileDownload, FaNpm } from "react-icons/fa";
 import { Button } from "@/components/atoms";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/motion";
 import { IAbout } from "@/types/type";
+import Link from "next/link";
 
 const ContainerTextFlip = dynamic(() => import("@/components/atoms").then(mod => ({ default: mod.ContainerTextFlip })), {
   ssr: false,
@@ -68,6 +69,13 @@ const About = ({ specialization, name, interest, words }: IAbout) => {
           <span>Download CV</span>
           <FaFileDownload className="text-xl" />
         </Button>
+      </motion.div>
+
+      <motion.div variants={fadeIn({ direction: "right", type: "tween", delay: 1.9, duration: 0.4 })} className="text-left! max-w-lg text-sm text-black dark:text-white mt-10">
+        Check out my custom international fields package for React applications which available on NPM -
+        <Link href="https://www.npmjs.com/package/international-fields" target="_blank" rel="noopener noreferrer">
+          <FaNpm className="text-3xl inline ml-1" />
+        </Link>
       </motion.div>
     </div>
   );

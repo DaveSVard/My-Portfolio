@@ -17,7 +17,7 @@ const Circle = dynamic(() => import("@/components/atoms").then(mod => ({ default
 
 const Hero = (about: IAbout) => {
   return (
-    <InViewContainer className="flex flex-col mdl:flex-row gap-12 items-center pt-5 pb-20 xl:pt-10 xl:pb-24">
+    <InViewContainer className="flex flex-col mdl:flex-row gap-12 items-center pt-5 pb-16 xl:pt-10 xl:pb-20">
       <div className="flex-1 order-2 mdl:order-1">
         <About {...about} />
       </div>

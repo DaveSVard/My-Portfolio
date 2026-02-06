@@ -18,7 +18,7 @@ const Stats = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-0.5 relative pb-10",
+        "grid grid-cols-1 sm:grid-cols-2 gap-4 p-0.5 relative pb-10",
         className
       )}
     >

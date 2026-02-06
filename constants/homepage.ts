@@ -8,7 +8,6 @@ export const homepage = {
   },
   stats: [
     { value: 2, infoText: "Years of experience" },
-    { value: 12, infoText: "Project completed" },
     { value: 13, infoText: "Technologies mastered" },
   ],
 };
